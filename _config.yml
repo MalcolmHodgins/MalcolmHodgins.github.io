@@ -1,2 +1,4 @@
 name: Malcolm Hodgins, Engineering Student
 markdown: kramdown
+
+permalink: /projects/:year/:month/:day/:title
