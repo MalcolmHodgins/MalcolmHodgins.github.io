@@ -11,13 +11,13 @@ With a surplus of available time due to COVID-19, I decided to put to use the el
 <p>
   <ul>
     <li>
-      <span> - Balance indefinitely i.e. be a stable closed-loop system </span>
+      <span> Balance indefinitely i.e. be a stable closed-loop system </span>
     </li>
     <li>
-      <span> - Able to resist and dissipate bumps to the pendulum </span>
+      <span> Able to resist and dissipate bumps to the pendulum </span>
     </li>
     <li>
-      <span> - Hold a position on the surface i.e. average velocity of the robot is zero </span>
+      <span> Hold a position on the surface i.e. average velocity of the robot is zero </span>
     </li>
 
   </ul>
