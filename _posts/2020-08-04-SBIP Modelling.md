@@ -37,7 +37,7 @@ We start off with the free body diagram for the assembly. There is, of course, t
 </p>
 
 <figure>
-  <img src="../images/sbip_modelling/free_body_diagram.jpg" width="445" height="333" alt="free body diagram for inverted pendulum">
+  <img src="/images/sbip_modelling/free_body_diagram.jpg" width="445" height="333" alt="free body diagram for inverted pendulum">
 
   <figcaption> Free body diagram for the inverted pendulum problem. </figcaption>
 </figure>
