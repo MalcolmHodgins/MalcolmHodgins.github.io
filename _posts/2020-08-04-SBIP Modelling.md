@@ -92,6 +92,7 @@ The set of state-space equations must also be converted to Matlab code in order 
 The Matlab code below was grabbed from the <a href="http://ctms.engin.umich.edu/CTMS/">Matlab Controls Tutorial site</a> mentioned previously in the post. Parameter values for the model are included in the code but are arbitrary until the robot is constructed. Once the robot is fully assembled, the moment of inertia and the center of mass can be computed, and the mass of both the cart and pendulum can be measured.
 </p>
 
+<p>
 <code>
 M = .5;
 m = 0.2;
@@ -121,3 +122,4 @@ outputs = {'x'; 'phi'};
 
 sys_ss = ss(A,B,C,D,'statename',states,'inputname',inputs,'outputname',outputs)
 </code>
+</p>
