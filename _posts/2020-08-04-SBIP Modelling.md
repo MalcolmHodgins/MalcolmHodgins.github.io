@@ -68,9 +68,56 @@ The last step is to linearize the two equations of motion. The equations must be
 </figure>
 
 <p>
-The resulting equations after the linearization has been applied is,
+The resulting equations after the linearization has been applied is shown below. Note that the force <em>F</em> has been replaced with <em>u</em>.
 </p>
 
 <figure>
   <img src="/images/sbip_modelling/linearized_eqns.JPG">
 </figure>
+
+<h2> State-Space Equations </h2>
+
+<p>
+In order to deal with the multiple outputs (pendulum angle, pendulum angular velocity, cart position, cart velocity) from the system and the single input (control force, <em>u</em>), the equations must be converted to a state space model. Rearranging the equations to a set of first order differential equations, the state space model can be represented as
+</p>
+
+<figure>
+  <img src="/images/sbip_modelling/state_space_model.JPG">
+</figure>
+
+<h2> Matlab State-Space Representation </h2>
+
+<p>
+The set of state-space equations must also be converted to Matlab code in order to perform simulations of the open-loop and closed-loop systems. Further on in this post, it is shown how weightings of the state variables are selected in the controller to obtain a closed-loop response of the system that satisfies the design requirements.
+The Matlab code below was grabbed from the <a href="http://ctms.engin.umich.edu/CTMS/">Matlab Controls Tutorial site</a> mentioned previously in the post. Parameter values for the model are included in the code but are arbitrary until the robot is constructed. Once the robot is fully assembled, the moment of inertia and the center of mass can be computed, and the mass of both the cart and pendulum can be measured.
+</p>
+
+<code>
+M = .5;
+m = 0.2;
+b = 0.1;
+I = 0.006;
+g = 9.8;
+l = 0.3;
+
+p = I*(M+m)+M*m*l^2; %denominator for the A and B matrices
+
+A = [0      1              0           0;
+     0 -(I+m*l^2)*b/p  (m^2*g*l^2)/p   0;
+     0      0              0           1;
+     0 -(m*l*b)/p       m*g*l*(M+m)/p  0];
+B = [     0;
+     (I+m*l^2)/p;
+          0;
+        m*l/p];
+C = [1 0 0 0;
+     0 0 1 0];
+D = [0;
+     0];
+
+states = {'x' 'x_dot' 'phi' 'phi_dot'};
+inputs = {'u'};
+outputs = {'x'; 'phi'};
+
+sys_ss = ss(A,B,C,D,'statename',states,'inputname',inputs,'outputname',outputs)
+</code>
