@@ -94,7 +94,8 @@ The Matlab code below was grabbed from the <a href="http://ctms.engin.umich.edu/
 
 <p>
   <pre>
-    <code><span>  M = .5;
+    <code>
+    M = .5;
     m = 0.2;
     b = 0.1;
     I = 0.006;
@@ -120,6 +121,6 @@ The Matlab code below was grabbed from the <a href="http://ctms.engin.umich.edu/
     inputs = {'u'};
     outputs = {'x'; 'phi'};
 
-    sys_ss = ss(A,B,C,D,'statename',states,'inputname',inputs,'outputname',outputs)</span></code>
+    sys_ss = ss(A,B,C,D,'statename',states,'inputname',inputs,'outputname',outputs)</code>
   </pre>
 </p>
