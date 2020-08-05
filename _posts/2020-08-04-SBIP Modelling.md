@@ -60,7 +60,7 @@ Similarly, the second equation of motion can be found by summing the forces perp
 
 <h2> Linearization </h2>
 <p>
-The last step is to linearize the two equations of motion. The equations must be linearized since the techniques used to design the controller for the system must be applied to a linear-time-invariant system in order to be valid. The linearization will be valid as long as the pendulum does not deviate further then 20 degrees from the point of linearization. Beyond that point, the error will begin to become too great and the system could become unstable despite the control action applied. Referring to Figure 1, the angle of the pendulum (&thetasym;) in the upright position is at &pi; degrees. A deviation of &phi; degrees affects the pendulum according to &thetasym; = &pi; + &phi;. The following approximations are substituted into the two nonlinear equations of motion,
+The last step is to linearize the two equations of motion. The equations must be linearized since the techniques used to design the controller for the system must be applied to a linear-time-invariant system in order to be valid. The linearization will be valid as long as the pendulum does not deviate further then 20 degrees from the point of linearization. Beyond that point, the error will begin to become too great and the system could become unstable despite the control action applied. Referring to Figure 1, the angle of the pendulum (&theta;) in the upright position is at &pi; degrees. A deviation of &phi; degrees affects the pendulum according to &theta; = &pi; + &phi;. The following approximations are substituted into the two nonlinear equations of motion,
 </p>
 
 <figure>
