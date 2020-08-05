@@ -38,3 +38,4 @@ We start off with the free body diagram for the assembly. There is, of course, t
 
 
 <img src="/images/sbip_modelling/free_body_diagram.JPG" width="445" height="333">
+<img src="/images/sbip_modelling/free_body_diagram.JPG">
