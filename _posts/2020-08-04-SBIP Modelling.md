@@ -36,11 +36,41 @@ After spending sometime online researching controller design, I came across a <a
 We start off with the free body diagram for the assembly. There is, of course, the pendulum, which is modelled simply as a rod in this case, as well as a cart to which the pendulum is affixed. Force is applied at the cart to counteract the motion of the pendulum. For example, if the pendulum begins falling to the left, the cart will move to the left to creating a moment about the center of the pendulum and causing the pendulum to return to an upright position.
 </p>
 
-<!--
-<img src="/images/sbip_modelling/free_body_diagram.JPG" width="445" height="333">
--->
-
 <figure>
   <img src="/images/sbip_modelling/free_body_diagram.JPG">
   <figcaption> Figure 1 - Free body diagram of inverted pendulum.</figcaption>
+</figure>
+
+<p>
+There are two nonlinear differential equations required to accurately describe the motion of the inverted pendulum-cart system. The first equation is found by summing the horizontal forces in the cart and then the pendulum. Following this, one equation is substituted into the other to arrive at:
+</p>
+
+<figure>
+  <img src="/images/sbip_modelling/horizontal_forces_eqn.JPG">
+</figure>
+
+<p>
+Similarly, the second equation of motion can be found by summing the forces perpendicular to the axis of the pendulum. The resulting equation is
+</p>
+
+<figure>
+  <img src="/images/sbip_modelling/pendulum_forces.JPG">
+</figure>
+
+
+<h2> Linearization </h2>
+<p>
+The last step is to linearize the two equations of motion. The equations must be linearized since the techniques used to design the controller for the system must be applied to a linear-time-invariant system in order to be valid. The linearization will be valid as long as the pendulum does not deviate further then 20 degrees from the point of linearization. Beyond that point, the error will begin to become too great and the system could become unstable despite the control action applied. Referring to Figure 1, the angle of the pendulum (&thetasym;) in the upright position is at &pi; degrees. A deviation of &phi; degrees affects the pendulum according to &thetasym; = &pi; + &phi;. The following approximations are substituted into the two nonlinear equations of motion,
+</p>
+
+<figure>
+  <img src="/images/sbip_modelling/linearization.JPG">
+</figure>
+
+<p>
+The resulting equations after the linearization has been applied is,
+</p>
+
+<figure>
+  <img src="/images/sbip_modelling/linearized_eqns.JPG">
 </figure>
