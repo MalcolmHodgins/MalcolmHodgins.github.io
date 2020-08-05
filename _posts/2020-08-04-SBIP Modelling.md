@@ -36,5 +36,11 @@ After spending sometime online researching controller design, I came across a <a
 We start off with the free body diagram for the assembly. There is, of course, the pendulum, which is modelled simply as a rod in this case, as well as a cart to which the pendulum is affixed. Force is applied at the cart to counteract the motion of the pendulum. For example, if the pendulum begins falling to the left, the cart will move to the left to creating a moment about the center of the pendulum and causing the pendulum to return to an upright position.
 </p>
 
+<!--
+<img src="/images/sbip_modelling/free_body_diagram.JPG" width="445" height="333">
+-->
 
-<img src="/images/sbip_modelling/free_body_diagram.JPG">
+<figure>
+  <img src="/images/sbip_modelling/free_body_diagram.JPG">
+  <figcaption> Figure 1 - Free body diagram of inverted pendulum.</figcaption>
+</figure>
