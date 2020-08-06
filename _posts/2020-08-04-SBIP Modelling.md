@@ -9,7 +9,7 @@ With a surplus of available time due to COVID-19, I decided to put to use the el
 </p>
 
 <p>
-  <ul>
+  <ul class="posts">
     <li>
       <span> Balance indefinitely i.e. be a stable closed-loop system </span>
     </li>
