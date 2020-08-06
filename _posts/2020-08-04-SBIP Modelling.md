@@ -141,7 +141,7 @@ The optimal gain matrix, <em>K</em>, can be determined using a technique known a
 
 <p>
   <pre>
-    <code>
+    <code class="codebox">
     A = sys_d.a;
     B = sys_d.b;
     C = sys_d.c;
