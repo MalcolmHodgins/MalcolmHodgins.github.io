@@ -94,38 +94,39 @@ The Matlab code below was grabbed from the <a href="http://ctms.engin.umich.edu/
 
 <p>
   <pre>
-    <code>
-    M = .5; % mass of cart in kg
-    m = 0.2; % mass of pendulum in kg
-    b = 0.1; % drag coefficient
-    I = 0.006; % moment of inertia in kg-m^2
-    g = 9.8; % gravitational acceleration
-    l = 0.3; % length to pendulum center of mass
+    <code class="codebox">
+M = .5; % mass of cart in kg
+m = 0.2; % mass of pendulum in kg
+b = 0.1; % drag coefficient
+I = 0.006; % moment of inertia in kg-m^2
+g = 9.8; % gravitational acceleration
+l = 0.3; % length to pendulum center of mass
 
-    p = I*(M+m)+M*m*l^2; % denominator for the A and B matrices
+p = I*(M+m)+M*m*l^2; % denominator for the A and B matrices
 
-    A = [0      1              0           0;
-         0 -(I+m*l^2)*b/p  (m^2*g*l^2)/p   0;
-         0      0              0           1;
-         0 -(m*l*b)/p       m*g*l*(M+m)/p  0];
-    B = [     0;
-         (I+m*l^2)/p;
-              0;
-            m*l/p];
-    C = [1 0 0 0;
-         0 0 1 0];
-    D = [0;
-         0];
+A = [0      1              0           0;
+     0 -(I+m*l^2)*b/p  (m^2*g*l^2)/p   0;
+     0      0              0           1;
+     0 -(m*l*b)/p       m*g*l*(M+m)/p  0];
+B = [     0;
+     (I+m*l^2)/p;
+          0;
+        m*l/p];
+C = [1 0 0 0;
+     0 0 1 0];
+D = [0;
+     0];
 
-    states = {'x' 'x_dot' 'phi' 'phi_dot'};
-    inputs = {'u'};
-    outputs = {'x'; 'phi'};
+states = {'x' 'x_dot' 'phi' 'phi_dot'};
+inputs = {'u'};
+outputs = {'x'; 'phi'};
 
-    sys_ss = ss(A,B,C,D,'statename',states,'inputname',inputs,'outputname',outputs)
+sys_ss = ss(A,B,C,D,'statename',states,'inputname',inputs,'outputname',outputs)
 
-    Ts = 1/100;
+Ts = 1/100;
 
-    sys_d = c2d(sys_ss,Ts,'zoh')</code>
+sys_d = c2d(sys_ss,Ts,'zoh')
+    </code>
   </pre>
 </p>
 
@@ -142,35 +143,36 @@ The optimal gain matrix, <em>K</em>, can be determined using a technique known a
 <p>
   <pre>
     <code class="codebox">
-    A = sys_d.a;
-    B = sys_d.b;
-    C = sys_d.c;
-    D = sys_d.d;
-    Q = C'*C;*
-    Q(1,1) = 5000; % weighting for cart position
-    Q(3,3) = 100; % weighting for pendulum angle
-    R = 1;
-    [K] = dlqr(A,B,Q,R)
+A = sys_d.a;
+B = sys_d.b;
+C = sys_d.c;
+D = sys_d.d;
+Q = C'*C;*
+Q(1,1) = 5000; % weighting for cart position
+Q(3,3) = 100; % weighting for pendulum angle
+R = 1;
+[K] = dlqr(A,B,Q,R)
 
-    Ac = [(A-B*K)];
-    Bc = [B];
-    Cc = [C];
-    Dc = [D];
+Ac = [(A-B*K)];
+Bc = [B];
+Cc = [C];
+Dc = [D];
 
-    states = {'x' 'x_dot' 'phi' 'phi_dot'};
-    inputs = {'r'};
-    outputs = {'x'; 'phi'};
+states = {'x' 'x_dot' 'phi' 'phi_dot'};
+inputs = {'r'};
+outputs = {'x'; 'phi'};
 
-    Nbar = -61.55; % precompensator
-    sys_cl = ss(Ac,Bc*Nbar,Cc,Dc,Ts,'statename',states,'inputname',inputs,'outputname',outputs);
+Nbar = -61.55; % precompensator
+sys_cl = ss(Ac,Bc*Nbar,Cc,Dc,Ts,'statename',states,'inputname',inputs,'outputname',outputs);
 
-    t = 0:0.01:5;
-    r =0.2*ones(size(t));
-    [y,t,x]=lsim(sys_cl,r,t);
-    [AX,H1,H2] = plotyy(t,y(:,1),t,y(:,2),'plot');
-    set(get(AX(1),'Ylabel'),'String','cart position (m)')
-    set(get(AX(2),'Ylabel'),'String','pendulum angle (radians)')
-    title('Step Response with Digital LQR Control') </code>
+t = 0:0.01:5;
+r =0.2*ones(size(t));
+[y,t,x]=lsim(sys_cl,r,t);
+[AX,H1,H2] = plotyy(t,y(:,1),t,y(:,2),'plot');
+set(get(AX(1),'Ylabel'),'String','cart position (m)')
+set(get(AX(2),'Ylabel'),'String','pendulum angle (radians)')
+title('Step Response with Digital LQR Control')
+    </code>
   </pre>
 </p>
 
