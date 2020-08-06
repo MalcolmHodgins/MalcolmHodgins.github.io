@@ -57,7 +57,7 @@ img {
   background-color: #708090;
 } */
 
-.codebox {
+/* .codebox {
         border:2px solid black;
         background-color:#2F4F4F;
         white-space: pre-line;
@@ -65,5 +65,14 @@ img {
         font-size:0.9em;
         font-family: "Courier";
         color: #DCDCDC;
+        display: inline-block;
+} */
+
+.codebox {
+        border:1px solid black;
+        background-color:#EEEEFF;
+        white-space: pre-line;
+        padding:10px;
+        font-size:0.9em;
         display: inline-block;
 }
