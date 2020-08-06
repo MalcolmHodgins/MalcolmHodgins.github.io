@@ -37,7 +37,6 @@ ul.posts {
     margin: 20px auto 40px;
     font-size: 1.3em;
     list-style-type: circle;
-    list-style: none;
 }
 
 /* ul.posts li {
