@@ -95,14 +95,14 @@ The Matlab code below was grabbed from the <a href="http://ctms.engin.umich.edu/
 <p>
   <pre>
     <code>
-    M = .5;
-    m = 0.2;
-    b = 0.1;
-    I = 0.006;
-    g = 9.8;
-    l = 0.3;
+    M = .5; % mass of cart in kg
+    m = 0.2; % mass of pendulum in kg
+    b = 0.1; % drag coefficient
+    I = 0.006; % moment of inertia in kg-m^2
+    g = 9.8; % gravitational acceleration
+    l = 0.3; % length to pendulum center of mass
 
-    p = I*(M+m)+M*m*l^2; %denominator for the A and B matrices
+    p = I*(M+m)+M*m*l^2; % denominator for the A and B matrices
 
     A = [0      1              0           0;
          0 -(I+m*l^2)*b/p  (m^2*g*l^2)/p   0;
@@ -121,6 +121,68 @@ The Matlab code below was grabbed from the <a href="http://ctms.engin.umich.edu/
     inputs = {'u'};
     outputs = {'x'; 'phi'};
 
-    sys_ss = ss(A,B,C,D,'statename',states,'inputname',inputs,'outputname',outputs)</code>
+    sys_ss = ss(A,B,C,D,'statename',states,'inputname',inputs,'outputname',outputs)
+
+    Ts = 1/100;
+
+    sys_d = c2d(sys_ss,Ts,'zoh')</code>
   </pre>
 </p>
+
+<h2> Matlab Closed-loop Modelling </h2>
+
+<p>
+Now that a mathematical model has been created that represents the inverted pendulum-cart system, it is time to set up the simulation and close the feedback loop. Full-state feedback of the cart position, cart velocity, pendulum angle, and pendulum angular velocity is used to inform the control action taken by the controller and motors. In full state feedback, a vector of gains, <em>K</em>, where each element corresponds to a state of the system, is multiplied with the current state vector to output the force required by the motors for the current timestep.
+</p>
+
+<p>
+The optimal gain matrix, <em>K</em>, can be determined using a technique known as LQR (linear quadratic regulation). LQR consists of a Q matrix, which is the state-cost matrix, and an R matrix, which is the performance matrix. This method is not completely autonomous as the designer is still required to specify the cost values in the <em>Q</em> matrix, however, it is quite easy iterate by selecting <em>Q</em>-matrix values until the desired response is achieved. The following Matlab code can be added to the previous code to simulate the pendulum-cart system under closed-loop control.
+</p>
+
+<p>
+  <pre>
+    <code>
+    A = sys_d.a;
+    B = sys_d.b;
+    C = sys_d.c;
+    D = sys_d.d;
+    Q = C'*C;*
+    Q(1,1) = 5000; % weighting for cart position
+    Q(3,3) = 100; % weighting for pendulum angle
+    R = 1;
+    [K] = dlqr(A,B,Q,R)
+
+    Ac = [(A-B*K)];
+    Bc = [B];
+    Cc = [C];
+    Dc = [D];
+
+    states = {'x' 'x_dot' 'phi' 'phi_dot'};
+    inputs = {'r'};
+    outputs = {'x'; 'phi'};
+
+    Nbar = -61.55; % precompensator
+    sys_cl = ss(Ac,Bc*Nbar,Cc,Dc,Ts,'statename',states,'inputname',inputs,'outputname',outputs);
+
+    t = 0:0.01:5;
+    r =0.2*ones(size(t));
+    [y,t,x]=lsim(sys_cl,r,t);
+    [AX,H1,H2] = plotyy(t,y(:,1),t,y(:,2),'plot');
+    set(get(AX(1),'Ylabel'),'String','cart position (m)')
+    set(get(AX(2),'Ylabel'),'String','pendulum angle (radians)')
+    title('Step Response with Digital LQR Control') </code>
+  </pre>
+</p>
+
+<p>
+The first thing to note about this code is that the disturbance used in this case is a command for the cart to move 0.2 m from a position of 0.0 m. The second thing to note is that there is an <em>Nbar</em> term included in the code. This term is the precompensator and must be tuned for each system, otherwise the cart-pendulum system will not go to the commanded position. This is due to the fact that the full state feedback system does not directly compare states to their desired value. For example, if a cart position of 0.2 m is commanded, without the tuned precompensator value, the cart may go to any other value than 0.2 m. Through trial and error, the precompensator value is selected such that the final cart position matches the commanded position within a defined uncertainty.
+</p>
+
+<p>
+With the full-state feedback set up as well as the precompensator, the schematic for the control system and the open-loop plant takes the following form:
+</p>
+
+<figure>
+  <img src="/images/sbip_modelling/control_system_schematic.JPG" alt="closed-loop system schematic for pendulum-cart system">
+  <figcaption> Figure 2 - Schematic of the inverted pendulum-cart open-loop system as well as the control system.</figcaption>
+</figure>
