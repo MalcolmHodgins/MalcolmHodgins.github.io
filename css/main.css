@@ -63,6 +63,7 @@ img {
         white-space: pre-line;
         padding:10px;
         font-size:0.9em;
-        font-family: "Courier"
+        font-family: "Courier";
+        color: #DCDCDC;
         display: inline-block;
 }
