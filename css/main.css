@@ -51,23 +51,6 @@ img {
     width: 70%;
 }
 
-/* code {
-  font-family: Consolas,"courier new";
-  color: #F0F8FF;
-  background-color: #708090;
-} */
-
-/* .codebox {
-        border:2px solid black;
-        background-color:#2F4F4F;
-        white-space: pre-line;
-        padding:10px;
-        font-size:0.9em;
-        font-family: "Courier";
-        color: #DCDCDC;
-        display: inline-block;
-} */
-
 .codebox {
         border:2px solid black;
         background-color:#2F4F4F;
