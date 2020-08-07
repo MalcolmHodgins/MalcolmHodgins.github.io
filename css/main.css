@@ -52,11 +52,17 @@ ul.posts {
   object-fit: contain;
 } */
 
-.centered {
+/* .centered {
   display: block;
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
+} */
+
+.centered {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .codebox {
