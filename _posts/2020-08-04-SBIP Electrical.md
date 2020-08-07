@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Malcolm Hodgins, Engineering Student, Tries A Post From GitHub Desktop"
-date: 2020-07-31
+title: "Malcolm Hodgins, Engineering Student, SBIP Electrical Design"
+date: 2020-08-09
 ---
 
 Using this post to help get a handle of how this GitHub and post stuff works on my website. Looks like it went well :D.
