@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Malcolm Hodgins, Engineering Student, SBIP Electrical Design"
+title: "Self-Balancing Inverted Pendulum - Electrical Design"
 date: 2020-08-09
 ---
 
