@@ -39,16 +39,17 @@ ul.posts {
     list-style-type: circle;
 }
 
-/* ul.posts li {
-    list-style: none;
-    font-size: 1.5em;
-} */
-
-img {
+/* img {
     display: block;
     margin-left: auto;
     margin-right: auto;
     width: 70%;
+} */
+
+img {
+  height: 100vh;
+  width: 100%;
+  object-fit: contain;
 }
 
 .codebox {
