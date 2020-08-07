@@ -35,7 +35,7 @@ We start off with the free body diagram for the assembly. There is, of course, t
 </p>
 
 <figure>
-  <img src="/images/sbip_modelling/free_body_diagram.JPG">
+  <img src="/images/sbip_modelling/free_body_diagram.JPG" class="centered">
   <figcaption> Figure 1 - Free body diagram of inverted pendulum.</figcaption>
 </figure>
 

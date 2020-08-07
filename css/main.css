@@ -46,10 +46,16 @@ ul.posts {
     width: 70%;
 } */
 
-img {
+/* img {
   height: 100%;
   width: 100vh;
   object-fit: contain;
+} */
+
+.centered {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .codebox {
