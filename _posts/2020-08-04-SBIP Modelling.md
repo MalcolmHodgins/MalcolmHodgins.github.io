@@ -44,7 +44,7 @@ There are two nonlinear differential equations required to accurately describe t
 </p>
 
 <figure>
-  <img src="/images/sbip_modelling/horizontal_forces_eqn.JPG">
+  <img src="/images/sbip_modelling/horizontal_forces_eqn.JPG" class="centered">
 </figure>
 
 <p>
@@ -52,7 +52,7 @@ Similarly, the second equation of motion can be found by summing the forces perp
 </p>
 
 <figure>
-  <img src="/images/sbip_modelling/pendulum_forces.JPG">
+  <img src="/images/sbip_modelling/pendulum_forces.JPG" class="centered">
 </figure>
 
 
@@ -62,7 +62,7 @@ The last step is to linearize the two equations of motion. The equations must be
 </p>
 
 <figure>
-  <img src="/images/sbip_modelling/linearization.JPG">
+  <img src="/images/sbip_modelling/linearization.JPG" class="centered">
 </figure>
 
 <p>
@@ -70,7 +70,7 @@ The resulting equations after the linearization has been applied is shown below.
 </p>
 
 <figure>
-  <img src="/images/sbip_modelling/linearized_eqns.JPG">
+  <img src="/images/sbip_modelling/linearized_eqns.JPG" class="centered">
 </figure>
 
 <h2> State-Space Equations </h2>
@@ -80,7 +80,7 @@ In order to deal with the multiple outputs (pendulum angle, pendulum angular vel
 </p>
 
 <figure>
-  <img src="/images/sbip_modelling/state_space_model.JPG">
+  <img src="/images/sbip_modelling/state_space_model.JPG" class="centered">
 </figure>
 
 <h2> Matlab State-Space Representation </h2>
@@ -183,6 +183,6 @@ With the full-state feedback set up as well as the precompensator, the schematic
 </p>
 
 <figure>
-  <img src="/images/sbip_modelling/control_system_schematic.JPG" alt="closed-loop system schematic for pendulum-cart system">
+  <img src="/images/sbip_modelling/control_system_schematic.JPG" alt="closed-loop system schematic for pendulum-cart system" class="centered">
   <figcaption> Figure 2 - Schematic of the inverted pendulum-cart open-loop system as well as the control system.</figcaption>
 </figure>
