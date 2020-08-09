@@ -5,7 +5,7 @@ date: 2020-08-04
 ---
 <h2> Introduction </h2>
 <p>
-With a surplus of available time due to COVID-19, I decided to put to use the electronics, programming, control theory skills to the test by creating a robot consisting of only two wheels that is able to stand straight-up on these wheels indefinitely (imagine trying to balance a pencil on its eraser with only a finger). This is a well-known control problem since it is inherently an unstable system to begin with and requires careful consideration of the controller design in order to close the loop, allowing the pendulum to balance. I set out on this project with the following objectives in mind:
+Over the summer, I undertook the challenge of designing and deploying the development of a self-balancing inverted pendulum robot. The inverted pendulum control problem is a popular example since the inverted pendulum is a naturally unstable system. Only through careful consideration of the controller can the unstable open-loop system become a stable closed-loop system. For those who may be unfamiliar with the inverted pendulum system, imagine trying to balance a pencil that is standing upright on its eraser using only your finger. Naturally, the pencil, in this unstable orientation will begin to fall immediately, so your finger must to moved in order to move the base of the pencil beneath its center of mass. The documentation of this project will be broken up into several parts to make the content more digestible, and by no means are these posts meant to be rigorous documentation of the robot. Starting out on this project, I had several key objectives in mind for what I wanted my robot to be able to achieve:
 </p>
 
 <ul class="posts">
