@@ -30,8 +30,7 @@ nav ul li, footer ul li {
   width: 1000px;
   margin: 10px;
   text-align: left;
-  line-height: 75px;
-  font-size: 30px;
+  font-size: 1.5em;
 }
 
 a {
