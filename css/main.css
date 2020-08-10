@@ -29,8 +29,10 @@ nav ul li, footer ul li {
   background-color: #FFFFFF;
   width: 1000px;
   margin: 10px;
-  text-align: left;
   font-size: 1.5em;
+  align-items: center;
+  justify-content: left;
+  
 }
 
 .flex-container-home-intro > div > img{
