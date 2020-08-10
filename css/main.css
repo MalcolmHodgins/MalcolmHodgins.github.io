@@ -8,6 +8,7 @@ nav ul, footer ul {
     padding: 0px;
     list-style: none;
     font-weight: bold;
+    text-align: center;
 }
 
 nav ul li, footer ul li {
@@ -36,7 +37,7 @@ nav ul li, footer ul li {
 }
 
 .flex-container-home-intro > div > img{
-  max-width: 300px;
+  max-width: 250px;
   height: auto;
   border-radius: 50%;
 }
