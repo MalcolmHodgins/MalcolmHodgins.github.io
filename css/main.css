@@ -23,6 +23,8 @@ nav ul li, footer ul li {
   flex-wrap: nowrap;
   flex-direction: row;
   background-color: white;
+  align-items: center;
+  justify-content: left;
 }
 
 .flex-container-home-intro > div {
@@ -30,17 +32,13 @@ nav ul li, footer ul li {
   width: 1000px;
   margin: 10px;
   font-size: 1.5em;
-  align-items: center;
-  justify-content: left;
-  
+
 }
 
 .flex-container-home-intro > div > img{
-  max-width: 100%;
+  max-width: 300px;
   height: auto;
   border-radius: 50%;
-  margin-top: auto;
-  margin-bottom: auto;
 }
 
 a {
