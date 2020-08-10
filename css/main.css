@@ -18,6 +18,22 @@ nav ul li, footer ul li {
     padding:5px;
 }
 
+.flex-container-home-intro {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  background-color: white;
+}
+
+.flex-container-home-intro > div {
+  background-color: #FFFFFF;
+  width: 1000px;
+  margin: 10px;
+  text-align: left;
+  line-height: 75px;
+  font-size: 30px;
+}
+
 a {
     text-decoration: none;
     color: #000000;
