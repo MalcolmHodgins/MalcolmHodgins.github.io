@@ -83,6 +83,12 @@ a:hover {
   background-color: #cce6ff;
 }
 
+.button_header {
+  border: 1px solid #cce6ff;
+  border-radius: 7px;
+  background-color: #cce6ff;
+}
+
 h1 {
     font-size: 3em;
     font-family:'Times', 'Serif';
