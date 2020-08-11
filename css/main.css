@@ -81,12 +81,14 @@ a:hover {
   border: 1px solid #cce6ff;
   border-radius: 7px;
   background-color: #cce6ff;
+  padding: 0 5px; /*top/bottom left/right*/
 }
 
 .button_header {
   border: 1px solid #cce6ff;
   border-radius: 7px;
   background-color: #cce6ff;
+
 }
 
 h1 {
