@@ -66,7 +66,7 @@ nav ul li, footer ul li {
 .flex-container-home-post-list > div > img {
   max-width: 200px;
   height: auto;
-  border-radius: 20px;
+  border-radius: 30px;
 }
 
 a {
