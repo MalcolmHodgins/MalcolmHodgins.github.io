@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Self-Balancing Inverted Pendulum - Electrical Design"
+title_image: "/images/sbip_electrical/wiring_schematic.JPG"
 date: 2020-08-09
 ---
 
