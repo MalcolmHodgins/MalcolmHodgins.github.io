@@ -36,8 +36,29 @@ nav ul li, footer ul li {
   text-align: center;
 }
 
-.flex-container-home-intro > div > img{
+.flex-container-home-intro > div > img {
   max-width: 250px;
+  height: auto;
+  border-radius: 50%;
+}
+
+.flex-container-home-post-list {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-items: left;
+}
+
+.flex-container-home-post-list > div {
+  background-color: #FFFFFF;
+  width: 1000px;
+  margin: 10px;
+  font-size: 1.5em;
+  text-align: left;
+}
+
+.flex-container-home-post-list > div > img {
+  max-width: 200px;
   height: auto;
   border-radius: 50%;
 }
