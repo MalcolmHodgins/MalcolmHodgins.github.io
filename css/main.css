@@ -52,6 +52,7 @@ nav ul li, footer ul li {
   margin-left: auto;
   margin-right: auto;
   height: 100px;
+  margin-bottom: 10px;
 }
 
 .flex-container-home-post-list > div {
