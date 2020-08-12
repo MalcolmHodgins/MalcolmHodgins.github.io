@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Self-Balancing Inverted Pendulum - State Space Modelling and Matlab Simulations"
-title_image: "/images/sbip_modelling/free_body_diagram.JPG"
+title_image: "/images/post_type_images/code.JPG"
 date: 2020-08-04
 ---
 <h2> Introduction </h2>
