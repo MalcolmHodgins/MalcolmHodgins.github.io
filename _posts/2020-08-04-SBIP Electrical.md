@@ -21,7 +21,7 @@ The total electrical diagram to address the design criteria is shown in Figure 1
 
 <figure>
   <img src="/images/sbip_electrical/wiring_schematic.JPG" class="centered">
-  <figcaption> Figure 1 - Wiring schematic for inverted pendulum robot.</figcaption>
+  <figcaption class="centered"> Figure 1 - Wiring schematic for inverted pendulum robot.</figcaption>
 </figure>
 
 <h2><a id="mpu6050"> MPU-6050 </a></h2>
@@ -31,7 +31,7 @@ One of the fundamental measurements that must be performed in order to implement
 
 <figure>
   <img src="/images/sbip_electrical/mpu6050.JPG" class="centered">
-  <figcaption> Figure 2 - MPU6050 module.</figcaption>
+  <figcaption class="centered"> Figure 2 - MPU6050 module.</figcaption>
 </figure>
 
 <p>
@@ -53,7 +53,7 @@ The American manufacturer <a href="https://www.pololu.com/category/115/25d-metal
 
 <figure>
   <img src="/images/sbip_electrical/gearmotors.JPG" class="centered">
-  <figcaption> Figure 3 - Brushed DC gearmotor selection from <a href="https://www.pololu.com/category/115/25d-metal-gearmotors">Pololu.</a></figcaption>
+  <figcaption class="centered"> Figure 3 - Brushed DC gearmotor selection from <a href="https://www.pololu.com/category/115/25d-metal-gearmotors">Pololu.</a></figcaption>
 </figure>
 
 <p>
