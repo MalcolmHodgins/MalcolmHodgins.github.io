@@ -37,7 +37,7 @@ We start off with the free body diagram for the assembly. The diagram consists o
 
 <figure>
   <img src="/images/sbip_modelling/free_body_diagram.JPG" class="centered">
-  <figcaption> Figure 1 - Free body diagram of inverted pendulum.</figcaption>
+  <figcaption class="centered"> Figure 1 - Free body diagram of inverted pendulum.</figcaption>
 </figure>
 
 <p>
@@ -181,7 +181,7 @@ The first thing to note about this code is that the disturbance used in this cas
 
 <figure>
   <img src="/images/sbip_modelling/matlab_sim_output.jpg" alt="Matlab simulation of closed-loop inverted pendulum system" class="centered">
-  <figcaption> Figure 2 - Matlab simulation output of the IP system under closed-loop control.</figcaption>
+  <figcaption class="centered"> Figure 2 - Matlab simulation output of the IP system under closed-loop control.</figcaption>
 </figure>
 
 <p>
@@ -190,5 +190,5 @@ With the full-state feedback set up, as well as the precompensator, the schemati
 
 <figure>
   <img src="/images/sbip_modelling/control_system_schematic.JPG" alt="closed-loop system schematic for pendulum-cart system" class="centered">
-  <figcaption> Figure 3 - Schematic of the inverted pendulum-cart open-loop system as well as the control system.</figcaption>
+  <figcaption class="centered"> Figure 3 - Schematic of the inverted pendulum-cart open-loop system as well as the control system.</figcaption>
 </figure>
