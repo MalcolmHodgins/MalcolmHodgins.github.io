@@ -52,14 +52,26 @@ The American manufacturer <a href="https://www.pololu.com/category/115/25d-metal
 </p>
 
 <figure>
-  <img src="/images/sbip_electrical/gearmotors.JPG">
+  <img src="/images/sbip_electrical/gearmotors.JPG" class="centered">
   <figcaption> Figure 3 - Brushed DC gearmotor selection from <a href="https://www.pololu.com/category/115/25d-metal-gearmotors">Pololu.</a></figcaption>
 </figure>
 
 <p>
-
+With the gearmotors selected, the motor control unit can be discussed. As you can probably guess from the data provided in Figure 3, the current and voltage requirements for these motors easily exceeds the capabilities of almost all micro-controllers. Therefore, the power from the motors will have to come from an external source. In this IP robot, a 12V/5A supply connected directly to mains voltage was used since it was readily available instead of a battery pack. The 12 V supply was connected to an L298N module which serves as a simple interface for the microcontroller to use to control the operation of the motors. An image of the L298N module is shown in Figure 4. The L298N allows the control of two DC motors at a time. One set of motor terminals is connected to OUT1 and OUT2 and the other set of motor terminals is connected to OUT3 and OUT4. ENA is for OUT1/2 and ENB is for OUT3/4. The enable pins must be set high to send power to the respective motor. Lastly IN1/2 controls the polarity of the voltage applied to OUT3/4. Setting IN1/2 to the same state (HIGH or LOW) causes braking action on the motor whereas IN1 set to HIGH and IN2 set to LOW, or vice versa, causes forward or reverse motor action. The analogous relationship exists for IN3/4 and OUT3/4.
 </p>
 
+<p>
+Regarding the electrical requirements for the L298N board, we already discussed that 12V is connected to the 12V pin on the board. Since the motor voltage is not greater than 12 V, no 5 V supply is required to be plugged in. The L298N uses an onboard regulator to step-down the 12 V to the 5 V required for the IC logic. The last thing to note is that the board has a maximum output current of 2.5 A, however, the motors are unlikely to require this much current during their operation so this limit is suitable.
+
+<figure>
+  <img src="/images/sbip_electrical/L298N.JPG" class="centered">
+  </figcaption>Figure 4 - L298N motor control module.</figcaption>
+</figure>
+
+<h2> Quadrature Encoder </h2>
+<p>
+
+</p>
 
 
 <h2> Arduino Mega 2560 </h2>
