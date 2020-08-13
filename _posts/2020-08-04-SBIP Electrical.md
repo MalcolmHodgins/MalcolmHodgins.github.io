@@ -15,7 +15,9 @@ In a <a href="https://malcolmhodgins.github.io/projects/2020/08/04/SBIP-Modellin
   <li>Measure cart position and cart velocity</li>
 <ol>
 
+<p>
 The total electrical diagram to address these design criteria is shown in Figure 1. In the rest of the post, the specific components from the circuit will be introduced.
+</p>
 
 <figure>
   <img src="/images/sbip_electrical/wiring_schematic.JPG" class="centered">
