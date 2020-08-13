@@ -65,7 +65,7 @@ Regarding the electrical requirements for the L298N board, we already discussed 
 
 <figure>
   <img src="/images/sbip_electrical/L298N.JPG" class="centered">
-  </figcaption>Figure 4 - L298N motor control module.</figcaption>
+  <figcaption class="centered"> Figure 4 - L298N motor control module.</figcaption>
 </figure>
 
 <h2> Quadrature Encoder </h2>
