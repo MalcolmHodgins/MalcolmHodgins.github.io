@@ -80,12 +80,12 @@ As mentioned previously in the post, the angle of the pendulum must be measured 
 
 <figure>
   <img src="/images/sbip_electrical/forward_rotation.PNG">
-  <figcaption> Figure 5 - Channel 1 (channel A on encoder) leading channel 2 (channel B on encoder).</figcaption>
+  <figcaption class="centered"> Figure 5 - Channel 1 (channel A on encoder) leading channel 2 (channel B on encoder).</figcaption>
 </figure>
 
 <figure>
   <img src="/images/sbip_electrical/backward_rotation.PNG">
-  <figcaption> Figure 6 - Channel 2 (channel B on encoder) leading channel 1 (channel A on encoder) indicating rotation opposite to Figure 5.</figcaption>
+  <figcaption class="centered"> Figure 6 - Channel 2 (channel B on encoder) leading channel 1 (channel A on encoder) indicating rotation opposite to Figure 5.</figcaption>
 </figure>
 
 <p>
@@ -107,5 +107,5 @@ With the knowledge that external PWM must be available on the micro-controller w
 
 <figure>
   <img src="/images/sbip_electrical/mega2560.PNG">
-  <figcaption> Figure 7 - Arduino Mega 2560 pinout.</figcaption>
+  <figcaption class="centered"> Figure 7 - Arduino Mega 2560 pinout.</figcaption>
 </figure>
