@@ -9,10 +9,10 @@ In a <a href="https://malcolmhodgins.github.io/projects/2020/08/04/SBIP-Modellin
 </p>
 
 <ol>
-  <li>Process data and execute instructions</li>
   <li><a href="#mpu6050">Measure pendulum angle and angular velocity</a></li>
-  <li>Provide control action</li>
-  <li>Measure cart position and cart velocity</li>
+  <li><a href="#motors">Provide control action</a></li>
+  <li><a href="#quad_encode">Measure cart position and cart velocity</a></li>
+  <li><a href="#micro">Process data and execute instructions</a></li>
 </ol>
 
 <p>
@@ -38,7 +38,7 @@ One of the fundamental measurements that must be performed in order to implement
 In terms of the electrical requirements of the MPU-6050, the "Vcc" pin takes 3.3 V which can be provided by the micro-controller, the "SCL" and "SDA" pins must be connected to "SCL" and "SDA" pins on the micro-controller to establish I2C communication, and the "INT" pin should be connected to an interrupt pin.
 </p>
 
-<h2> Brushed DC Gearmotors and DC Motor Control </h2>
+<h2><a id="motors"> Brushed DC Gearmotors and DC Motor Control </a></h2>
 <p>
 The second criteria the electrical system must fulfill is the ability to provide sufficient control action to correct disturbances to the IP. In the case of an IP robot, a motor of some sort is the clear option but depending on the specific system, vastly different control mechanisms can be employed to provide control action. For example, SpaceX is renowned for its upright-landing booster rockets. That system is clearly an IP and the control action to keep the rocket upright is provided by changing the direction the exhaust leaves the rocket so as to counteract movement at the nose of the rocket. Other IP projects balance the pendulum using the printer-head track from a dilapidated printer. In short, there really is no right answer when it comes to selecting the component which provides the control action so long as it satisfies the design criteria laid out for the project. Returning to our IP robot, there is a plethora of types of motors available to choose from; however, brushed DC motors have the advantage of usually being cheaper and more simple to operate.
 </p>
@@ -73,7 +73,7 @@ Regarding the electrical requirements for the L298N board, we already discussed 
   <figcaption class="centered"> Figure 4 - L298N motor control module.</figcaption>
 </figure>
 
-<h2> Quadrature Encoder </h2>
+<h2><a id="quad_encode"> Quadrature Encoder </a></h2>
 <p>
 As mentioned previously in the post, the angle of the pendulum must be measured as well as the position of the cart. Quadratic encoders satisfy the latter criterion. Quadratic encoders attach to the shaft of a motor, either the input or the output, and can use light or magnets to trigger an impulse on a sensor as the motor shaft rotates. Based on the number of impulses expected per rotation of the motor shaft, counting the number of impulses can provide information about the position of the motor shaft. The quadratic encoders used in this project came preassembled on the gearmotors from <a href="https://www.pololu.com/product/4825" class="button_EIT">Pololu</a>. As mentioned in the datasheet, two hall effect sensors are used to measure the magnetic fields from a small disk embedded with magnets which rotates about the motor shaft. As magnets pass the hall effect sensors, rising and falling edges are produced which can be counted to provide information about how far the wheel has rotated as well as how fast the wheel is rotating. The two channels are positioned 90 degrees out of phase to allow for motor direction to be measured as well. This is can be seen in Figures 5 and 6. By comparing the sequence of rising and falling edges coming from channel A and channel B, that is to look for which channel sends a rising edge first, we can see that channel A is leading channel B, indicating forward motion. The assignment of forward motion depends on how the L298N and motors are connected so it is essentially arbitrary. However, continuing with the same convention for direction assignment, in Figure 6, we can see that channel B is leading channel A so the rotation direction must be backwards now.
 </p>
@@ -96,7 +96,7 @@ In terms of actually measuring the distance the cart has travelled and the cart 
 The last thing to discuss about quadratic encoders before moving on is the electrical requirements. The Vcc pin requires a voltage greater than 3.5 V so a 5 V pin on the microcontroller should used. Mentioned in the last paragraph as well, two external interrupt pins must be available on the micro-controller to count the edges from the hall effect sensors.
 </p>
 
-<h2> Arduino Mega 2560 </h2>
+<h2><a id="micro"> Arduino Mega 2560 </a></h2>
 <p>
 As can be seen from Figure 1, all of the components in the IP robot are connected to the micro-controller. Within this circuit, the micro-controller serves to execute instructions, predetermined by the loaded code, based on the data received from the external components. On that basis alone, a vast number of micro-controllers or simply small computers could fit the criteria and be a candidate as the final component for this function of the IP robot. For example, the Arduino Uno seems to fit this criteria. A Raspberry Pi as well. There are several more specific criteria that narrow down the available candidates significantly. Since the brushed gearmotors of the IP robot will be controlled with PWM signals, and our Matlab model assumes we have uninterrupted control over the motors, the PWM signal must be an external PWM pin i.e. a PWM signal must be driven by the hardware on board the micro-controller. This fact alone rules out a Raspberry Pi as a candidate for the micro-controller since a Raspberry Pi uses software-based PWM control. In practice, this means a Raspberry Pi cannot perform PWM and execute instructions at the same time. Whenever the Raspberry Pi would need to read data from the MPU-6050, for example, the PWM signal to the motors would go dead and consequently, the controller would have no ability to correct the error that would immediately begin to accrue in the states being measured. Obviously, this would provide quite the challenge to producing a stable-closed loop system response if this controller was used.
 </p>
