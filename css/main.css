@@ -132,12 +132,22 @@ ul.posts {
 ol {
     margin: 20px auto 40px;
     font-size: 1.5em;
+    color: #333;
+}
+
+ol li {
+    color: #333;
 }
 
 ul {
-  margin: 20px auto 40px;
-  font-size: 1.5em;
-  list-style-type: circle;
+    margin: 20px auto 40px;
+    font-size: 1.5em;
+    list-style-type: circle;
+    color: #333;
+}
+
+ul li {
+    color: #333;
 }
 
 
