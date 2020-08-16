@@ -4,8 +4,6 @@ title: "Self-Balancing Inverted Pendulum - Electrical Design"
 title_image: "/images/post_type_images/BJT.JPG"
 date: 2020-08-09
 ---
-  <li><a href="#motors">Provide control action</a></li>
-  <li><a href="#quad_encode">Measure cart position and cart velocity</a></li>
 <section>
   <h2> Introduction </h2>
   <p>
