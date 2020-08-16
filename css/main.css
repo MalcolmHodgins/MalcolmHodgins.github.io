@@ -92,13 +92,13 @@ a:hover {
 
 .button_researcher {
   border-radius: 7px;
-  background-color: #F2626B;
+  background-color: #FEBA4F;
   padding: 0 5px; /*top/bottom left/right*/
 }
 
 .button_EIT {
   border-radius: 7px;
-  background-color: #FEBA4F;
+  background-color: #F2626B;
   padding: 0 5px; /*top/bottom left/right*/
 }
 
