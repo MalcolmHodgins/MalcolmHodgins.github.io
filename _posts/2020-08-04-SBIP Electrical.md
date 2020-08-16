@@ -43,6 +43,7 @@ date: 2020-08-09
   </p>
 </section>
 
+<span><br></span>
 <section>
   <h2><a id="motors"> Brushed DC Gearmotors and DC Motor Control </a></h2>
   <p>

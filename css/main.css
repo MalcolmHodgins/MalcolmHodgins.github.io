@@ -15,7 +15,7 @@ nav ul li, footer ul li {
     display: inline;
     margin-right: 20px;
     border-radius: 7px;
-    background-color:#88BBE4;
+    background-color:#B5EAD7;
     padding:8px;
     font-size: 17px;
 }
@@ -86,25 +86,25 @@ a:hover {
 
 .button {
   border-radius: 7px;
-  background-color: #AE0D7A;
+  background-color: #E2F0CB;
   padding: 0 5px; /*top/bottom left/right*/
 }
 
 .button_researcher {
   border-radius: 7px;
-  background-color: #998AD3;
+  background-color: #C7CEEA;
   padding: 0 5px; /*top/bottom left/right*/
 }
 
 .button_EIT {
   border-radius: 7px;
-  background-color: #CDF1AF;
+  background-color: #FFDAC1;
   padding: 0 5px; /*top/bottom left/right*/
 }
 
 .button_hobbyist {
   border-radius: 7px;
-  background-color: #E494D3;
+  background-color: #FF9AA2;
   padding: 0 5px; /*top/bottom left/right*/
 }
 
