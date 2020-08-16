@@ -107,7 +107,7 @@ date: 2020-08-09
   The last thing to discuss about quadrature encoders before moving on is the electrical requirements. The Vcc pin requires a voltage greater than 3.5 V so a 5 V pin on the microcontroller should used. Mentioned in the last paragraph as well, two external interrupt pins must be available on the micro-controller to count the edges from the hall effect sensors.
   </p>
 </section>
-
+<span><br></span>
 <section>
   <h2><a id="micro"> Arduino Mega 2560 </a></h2>
   <p>
