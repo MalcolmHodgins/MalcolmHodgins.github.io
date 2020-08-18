@@ -150,6 +150,10 @@ ul li {
     color: #333;
 }
 
+figure {
+  margin-inline-start: 0px;
+}
+
 
 .centered {
   display: block;
