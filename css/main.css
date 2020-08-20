@@ -70,6 +70,25 @@ nav ul li, footer ul li {
   border-radius: 30px;
 }
 
+.flex-container-resume {
+  display: flex;
+  background-color: white;
+  margin: auto 120px;
+  flex-direction: column;
+}
+
+.flex-container-resume > div {
+  margin: 0px;
+}
+
+.flex-container-resume > div > h1 {
+  border-bottom: 5px solid black;
+}
+
+.flex-container-resume > div > h2 {
+  border-bottom: 3px solid black;
+}
+
 a {
     text-decoration: none;
     color: #000000;
