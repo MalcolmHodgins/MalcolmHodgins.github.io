@@ -80,6 +80,7 @@ nav ul li, footer ul li {
 
 .flex-container-resume-contact > div > p {
   font-size: 1.2em;
+  margin: 0px 10px;
 }
 
 .flex-container-resume {
