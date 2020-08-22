@@ -110,6 +110,8 @@ nav ul li, footer ul li {
 
 .flex-container-resume > div > ul {
   font-size: 1.2em;
+  margin-top: 0px;
+  margin-bottom: 30px;
 }
 
 a {
