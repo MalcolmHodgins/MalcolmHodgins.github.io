@@ -70,6 +70,18 @@ nav ul li, footer ul li {
   border-radius: 30px;
 }
 
+.flex-container-resume-contact{
+  display: flex;
+  background-color: white;
+  margin: auto 120px;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.flex-container-resume-contact > div > p {
+  font-size: 1.2em;
+}
+
 .flex-container-resume {
   display: flex;
   background-color: white;
@@ -86,12 +98,12 @@ nav ul li, footer ul li {
 }
 
 .flex-container-resume > div > h1 {
-  border-bottom: 5px solid black;
+  border-bottom: 5px solid #333;
   color: #333;
 }
 
 .flex-container-resume > div > h2 {
-  border-bottom: 3px solid black;
+  border-bottom: 3px solid #333;
   color: #333;
 }
 
