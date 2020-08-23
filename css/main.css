@@ -24,19 +24,22 @@ nav ul li, footer ul li {
 .flex-container-home-intro {
   display: flex;
   flex-wrap: nowrap;
-  flex-direction: row;
+  flex-direction: column;;
   background-color: white;
-  align-items: center;
   background-image: url(/images/home_page/malcolmphoto-10.jpg);
   background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 20px;
 }
 
 .flex-container-home-intro > div {
-  background-color: #FFFFFF;
-  width: 1000px;
-  margin: 10px;
+  width: 50%;
+  margin: 30px;
   font-size: 1.5em;
-  text-align: center;
+  text-align: left;
+  color: white;
+  height: 600px;
 }
 
 .flex-container-home-intro > div > img {
