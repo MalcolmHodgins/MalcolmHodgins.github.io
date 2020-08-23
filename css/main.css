@@ -20,6 +20,19 @@ nav ul li, footer ul li {
     font-size: 17px;
 }
 
+.flex-container-home-intro-background{
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  background-color: white;
+  align-items: center;
+  background-image: url(/images/home_page/malcolmphoto-10.jpg);
+}
+
+.flex-container-home-intro-background > div > p {
+  color: white;
+}
+
 .flex-container-home-intro {
   display: flex;
   flex-wrap: nowrap;
