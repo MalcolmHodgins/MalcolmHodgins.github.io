@@ -101,7 +101,7 @@ I = 0.006; % moment of inertia in kg-m^2
 g = 9.8; % gravitational acceleration
 l = 0.3; % length to pendulum center of mass
 
-p = I*(M+m)+M*m*l^2; % denominator for the A and B matrices
+p = I*(M+m)+M*m*l^2;
 
 A = [0      1              0           0;
      0 -(I+m*l^2)*b/p  (m^2*g*l^2)/p   0;
@@ -150,8 +150,8 @@ B = sys_d.b;
 C = sys_d.c;
 D = sys_d.d;
 Q = C'*C;*
-Q(1,1) = 5000; % weighting for cart position
-Q(3,3) = 100; % weighting for pendulum angle
+Q(1,1) = 5000; % cart position
+Q(3,3) = 100; % pendulum angle
 R = 1;
 [K] = dlqr(A,B,Q,R)
 
@@ -173,9 +173,15 @@ sys_cl = ss(Ac,Bc*Nbar,Cc,Dc,Ts,...
 t = 0:0.01:5;
 r =0.2*ones(size(t));
 [y,t,x]=lsim(sys_cl,r,t);
-[AX,H1,H2] = plotyy(t,y(:,1),t,y(:,2),'plot');
-set(get(AX(1),'Ylabel'),'String','cart position (m)')
-set(get(AX(2),'Ylabel'),'String','pendulum angle (radians)')
+[AX,H1,H2] = plotyy(t,y(:,1),...
+                    t,y(:,2),...
+                    'plot');
+set(get(AX(1),'Ylabel'),...
+    'String',...
+    'cart position (m)')
+set(get(AX(2),'Ylabel'),...
+    'String',...
+    'pendulum angle (radians)')
 title('Step Response with Digital LQR Control')
 </code>
   </pre>
