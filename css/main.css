@@ -135,9 +135,11 @@ a:hover {
 }
 
 .button {
-  border-radius: 7px;
+  /* border-radius: 7px;
   background-color: #E2F0CB;
-  padding: 0 5px; /*top/bottom left/right*/
+  padding: 0 5px; /*top/bottom left/right*/ */
+  text-decoration: underline;
+  color: white;
 }
 
 .button_researcher {
