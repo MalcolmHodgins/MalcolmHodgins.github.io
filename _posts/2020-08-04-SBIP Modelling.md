@@ -120,7 +120,10 @@ states = {'x' 'x_dot' 'phi' 'phi_dot'};
 inputs = {'u'};
 outputs = {'x'; 'phi'};
 
-sys_ss = ss(A,B,C,D,'statename',states,'inputname',inputs,'outputname',outputs)
+sys_ss = ss(A,B,C,D,...
+            'statename',states,...
+            'inputname',inputs,...
+            'outputname',outputs);
 
 Ts = 1/100;
 
@@ -162,7 +165,10 @@ inputs = {'r'};
 outputs = {'x'; 'phi'};
 
 Nbar = -62; % precompensator
-sys_cl = ss(Ac,Bc*Nbar,Cc,Dc,Ts,'statename',states,'inputname',inputs,'outputname',outputs);
+sys_cl = ss(Ac,Bc*Nbar,Cc,Dc,Ts,...
+            'statename',states,...
+            'inputname',inputs,...
+            'outputname',outputs);
 
 t = 0:0.01:5;
 r =0.2*ones(size(t));
