@@ -93,7 +93,7 @@ The Matlab code below was grabbed from the <a href="http://ctms.engin.umich.edu/
 
 <p>
   <pre>
-    <code class="codebox">
+<code class="codebox">
 M = .5; % mass of cart in kg
 m = 0.2; % mass of pendulum in kg
 b = 0.1; % drag coefficient
@@ -128,7 +128,7 @@ sys_ss = ss(A,B,C,D,...
 Ts = 1/100;
 
 sys_d = c2d(sys_ss,Ts,'zoh')
-    </code>
+</code>
   </pre>
 </p>
 
