@@ -144,7 +144,7 @@ The optimal gain matrix, <em>K</em>, can be determined using a technique known a
 
 <p>
   <pre>
-    <code class="codebox">
+<code class="codebox">
 A = sys_d.a;
 B = sys_d.b;
 C = sys_d.c;
@@ -177,7 +177,7 @@ r =0.2*ones(size(t));
 set(get(AX(1),'Ylabel'),'String','cart position (m)')
 set(get(AX(2),'Ylabel'),'String','pendulum angle (radians)')
 title('Step Response with Digital LQR Control')
-    </code>
+</code>
   </pre>
 </p>
 
