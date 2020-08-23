@@ -22,7 +22,7 @@ nav ul li, footer ul li {
 
 .flex-container-home-intro-background{
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   flex-direction: row;
   background-color: white;
   align-items: center;
@@ -31,6 +31,8 @@ nav ul li, footer ul li {
 
 .flex-container-home-intro-background > div > p {
   color: white;
+  width: 50%;
+  min-height: 400px;
 }
 
 .flex-container-home-intro {
