@@ -108,7 +108,7 @@ date: 2020-08-17
     </p>
     <figure>
       <img src="/images/sbip_mechanical/thin_plate_moi.PNG" class="centered">
-      <figcaption class="centered"> Figure 9 - Thin rectangular plate moment of inertia.</figcaption>
+      <figcaption class="centered"> Figure 9 - Thin rectangular plate moment of inertia of height h, width w, and mass m.</figcaption>
     </figure>
     <p>
       From Figure 2 we see that the depth of the pendulum (56 mm) aligns with the dimension <em>w</em> shown in Figure 9. The dimension <em>h</em> is measured from the axle of the gearmotors to the top of the pendulum and found to be 0.184 m. Using the formula from Figure 9 as well as the mass of the pendulum, the moment of inertia for the pendulum is calculated to be 0.00386 kg m^2.

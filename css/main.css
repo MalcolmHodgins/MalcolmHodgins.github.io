@@ -220,4 +220,5 @@ figure {
   font-family: "Courier";
   color: #abb2bf;
   display: inline-block;
+  width: 100%;
 }
