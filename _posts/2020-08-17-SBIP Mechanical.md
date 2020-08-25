@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Self-Balancing Inverted Pendulum - Mechanical Design"
-title_image: "/images/post_type_images/robotics.JPG"
+title_image: "/images/post_type_images/mechanical.PNG"
 date: 2020-08-17
 ---
 <section>
