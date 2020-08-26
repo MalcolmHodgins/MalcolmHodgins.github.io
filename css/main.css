@@ -126,7 +126,7 @@ a {
 }
 
 a.post {
-  text-decoration: none;
+  text-decoration: underline;
   color: grey;
 }
 
@@ -145,9 +145,7 @@ a:hover {
 }
 
 .button_EIT {
-  border-radius: 7px;
-  background-color: #F2626B;
-  padding: 0 5px; /*top/bottom left/right*/
+  text-decoration: underline;
 }
 
 .button_hobbyist {
