@@ -223,4 +223,5 @@ figure {
   color: #abb2bf;
   display: inline-block;
   width: 100%;
+  overflow-x: scroll;
 }
