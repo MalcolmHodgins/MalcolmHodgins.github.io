@@ -107,23 +107,15 @@ A = [0      1              0           0;
      0 -(I+m*l^2)*b/p  (m^2*g*l^2)/p   0;
      0      0              0           1;
      0 -(m*l*b)/p       m*g*l*(M+m)/p  0];
-B = [     0;
-     (I+m*l^2)/p;
-          0;
-        m*l/p];
-C = [1 0 0 0;
-     0 0 1 0];
-D = [0;
-     0];
+B = [ 0; (I+m*l^2)/p; 0; m*l/p];
+C = [1 0 0 0; 0 0 1 0];
+D = [ 0; 0];
 
 states = {'x' 'x_dot' 'phi' 'phi_dot'};
 inputs = {'u'};
 outputs = {'x'; 'phi'};
 
-sys_ss = ss(A,B,C,D,...
-            'statename',states,...
-            'inputname',inputs,...
-            'outputname',outputs);
+sys_ss = ss(A,B,C,D, 'statename',states, 'inputname',inputs, 'outputname',outputs);
 
 Ts = 1/100;
 
@@ -165,23 +157,14 @@ inputs = {'r'};
 outputs = {'x'; 'phi'};
 
 Nbar = -62; % precompensator
-sys_cl = ss(Ac,Bc*Nbar,Cc,Dc,Ts,...
-            'statename',states,...
-            'inputname',inputs,...
-            'outputname',outputs);
+sys_cl = ss(Ac,Bc*Nbar,Cc,Dc,Ts, 'statename',states, 'inputname',inputs, 'outputname',outputs);
 
 t = 0:0.01:5;
 r =0.2*ones(size(t));
 [y,t,x]=lsim(sys_cl,r,t);
-[AX,H1,H2] = plotyy(t,y(:,1),...
-                    t,y(:,2),...
-                    'plot');
-set(get(AX(1),'Ylabel'),...
-    'String',...
-    'cart position (m)')
-set(get(AX(2),'Ylabel'),...
-    'String',...
-    'pendulum angle (radians)')
+[AX,H1,H2] = plotyy(t,y(:,1), t,y(:,2), 'plot');
+set(get(AX(1),'Ylabel'), 'String', 'cart position (m)')
+set(get(AX(2),'Ylabel'), 'String', 'pendulum angle (radians)')
 title('Step Response with Digital LQR Control')
 </code>
   </pre>
