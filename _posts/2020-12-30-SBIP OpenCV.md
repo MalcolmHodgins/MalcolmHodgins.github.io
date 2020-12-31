@@ -50,7 +50,7 @@ date: 2020-12-30
   </p>
   <p>
     <pre>
-<code class="codebox">
+<code class="codebox" style="height:800px;">
 #include &lt;opencv2/opencv.hpp&gt;
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
@@ -577,6 +577,6 @@ plt.show()
       </pre>
     </p>
     <p>
-      Since my textfile was a single column corresponding to the pendulum angle in each frame, it was very straightforward to read in with numpy. No data formatting was required. The next thing that is done in the code is it corrects for any misalignment in the orientation of the camera compared to the pendulum, that is, for example, if the camera is slightly tilted to the right (In fact you can see this code in action in the video I posted to YouTube by looking at the original video of the pendulum. Yet the plot that is shown is centered around zero!). Next, a vector is created that is the same length as the amount of data available and each element corresponds to the period between frames for the given framerate of the video. In this case, my videos were recorded at 30 frames per second. Following this, the video writer and plot are created. The plot is animated using <em>animation.FuncAnimation()</em> and the animation is saved using <em>ani.save()</em>. That's it!. Pretty easy, right?
+      Since my textfile was a single column corresponding to the pendulum angle in each frame, it was very straightforward to read in with numpy. No data formatting was required. The next thing that is done in the code is it corrects for any misalignment in the orientation of the camera compared to the pendulum, that is, for example, if the camera is slightly tilted to the right (In fact you can see this code in action in the video I posted to YouTube by looking at the original video of the pendulum. Yet the plot that is shown is centered around zero!). Next, a vector is created that is the same length as the amount of data available and each element corresponds to the period between frames for the given framerate of the video. In this case, my videos were recorded at 30 frames per second. Following this, the video writer and plot are created. The plot is animated using <em>animation.FuncAnimation()</em> and the animation is saved using <em>ani.save()</em>. That's it! Pretty easy, right?
     </p>
 </section>
