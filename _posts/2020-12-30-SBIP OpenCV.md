@@ -37,7 +37,7 @@ date: 2020-12-30
 <section>
   <h2> Inverted Pendulum Robot Preparation </h2>
     <p>
-      As you probably noticed in the video, my robot has three red squares on the side. I added these squares to give my robot a distinguishable color on the body that can be used with OpenCV to extract information about the orientation of the pendulum i.e. its angle. The squares are not high-tech; in fact, I cut them out of the lid of a peanut butter jar I had around my house. If its simple and it works, then no reason to change it right?
+      As you probably noticed in the video, my robot has three red squares on the side (why three? I answer this in the assumptions section). I added these squares to give my robot a distinguishable color on the body that can be used with OpenCV to extract information about the orientation of the pendulum i.e. its angle. The squares are not high-tech; in fact, I cut them out of the lid of a peanut butter jar I had around my house. If its simple and it works, then no reason to change it right? Well for now at least.
     </p>
 </section>
 
@@ -600,4 +600,12 @@ plt.show()
         <p>
           What if the camera which records the initial video is not facing the side of the inverted pendulum head on? Well, the angle measurements that are extracted will be less than what is actually occurring when the robot is operating. It may be a little confusing to understand why initially, but if you can imagine the robot turned, say 45 degrees, away from the camera and then we imagine how the squares would look to the camera, perhaps you can start to see why a given angle will appear as less to the camera. This is actually one of the reasons why I included 3 red squares in the first place. From high school math, we know that three points define the orientation of a plane. Using physical measurements of the spacing between these squares in addition to an image with the three red squares, we would be able to calibrate the image and determine by what amount and in what direction the robot has turned away from the camera. I didn't include this functionality in this version of the software because it is difficult to get working well and its above my paygrade for a holiday project; I have a family after all! Perhaps in a future version of this project I will implement this but for now it remains on the shelf.
         </p>
+</section>
+
+<section>
+  <h2> Closing Remarks </h2>
+    <p>
+      If you've made it this far, I'd like to say thank you for reading about my work! These projects are a lot of fun to take on but documenting them to this extent is truly a lot of work. I hope my project has helped introduce you to some OpenCV functionality and applications and perhaps will inspire you to try your hand at using computer vision as well. If you have any comments or would like to discuss anything please do not hesitate to reach out. Cheers!
+    </p>
+
 </section>
