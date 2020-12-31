@@ -263,7 +263,7 @@ int main(int argc, char** argv)
   <p>
     <pre>
 <code>
-#include <opencv2/opencv.hpp>
+#include &lt;opencv2/opencv.hpp&gt;
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/imgcodecs.hpp"
@@ -285,8 +285,8 @@ int main(int argc, char** argv)
 
     //initializing videowriter object
     int fps = 30;
-    int frame_width = static_cast<int>(cap.get(CAP_PROP_FRAME_WIDTH));
-    int frame_height = static_cast<int>(cap.get(CAP_PROP_FRAME_HEIGHT));
+    int frame_width = static_cast&lt;int&gt;(cap.get(CAP_PROP_FRAME_WIDTH));
+    int frame_height = static_cast&lt;int&gt;(cap.get(CAP_PROP_FRAME_HEIGHT));
     Size frame_size(frame_width, frame_height);
     VideoWriter firstVideoWriter("C:/Users/malco/Desktop/OpenCV 4_5_1/ip_opencv/final_version/ip_test_video2_contours.avi", VideoWriter::fourcc('M', 'J', 'P', 'G'), fps, frame_size, true);
     if (firstVideoWriter.isOpened() == false) //check if the videowriter object was initialized
@@ -362,32 +362,32 @@ int main(int argc, char** argv)
     <pre>
 <code>
 while (true)
+{
+    Mat imgOriginal;
+
+    bool bSuccess = cap.read(imgOriginal); // read a new frame from video
+    if (!bSuccess) //if not success, break loop
     {
-        Mat imgOriginal;
+        cout << "Cannot read a frame from video stream" << endl;
+        break;
+    }
 
-        bool bSuccess = cap.read(imgOriginal); // read a new frame from video
-        if (!bSuccess) //if not success, break loop
-        {
-            cout << "Cannot read a frame from video stream" << endl;
-            break;
-        }
+    Mat imgHSV;
+    cvtColor(imgOriginal, imgHSV, COLOR_BGR2HSV); //Convert the captured frame from BGR to HSV
 
-        Mat imgHSV;
-        cvtColor(imgOriginal, imgHSV, COLOR_BGR2HSV); //Convert the captured frame from BGR to HSV
+    Mat imgThresholded;
+    inRange(imgHSV, Scalar(iLowH, iLowS, iLowV), Scalar(iHighH, iHighS, iHighV), imgThresholded); //Threshold the image
 
-        Mat imgThresholded;
-        inRange(imgHSV, Scalar(iLowH, iLowS, iLowV), Scalar(iHighH, iHighS, iHighV), imgThresholded); //Threshold the image
+    //morphological opening (removes small objects from the foreground)
+    erode(imgThresholded, imgThresholded, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)));
+    dilate(imgThresholded, imgThresholded, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)));
 
-        //morphological opening (removes small objects from the foreground)
-        erode(imgThresholded, imgThresholded, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)));
-        dilate(imgThresholded, imgThresholded, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)));
+    //morphological closing (removes small holes from the foreground)
+    dilate(imgThresholded, imgThresholded, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)));
+    erode(imgThresholded, imgThresholded, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)));
 
-        //morphological closing (removes small holes from the foreground)
-        dilate(imgThresholded, imgThresholded, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)));
-        erode(imgThresholded, imgThresholded, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)));
-
-        secondVideoWriter.write(imgThresholded);//write thresholded frame to video file
-        //imshow("Thresholded Image", imgThresholded); //show thresholded image
+    secondVideoWriter.write(imgThresholded);//write thresholded frame to video file
+    //imshow("Thresholded Image", imgThresholded); //show thresholded image
 </code>
     </pre>
   </p>
@@ -412,28 +412,28 @@ while (true)
   <p>
     <pre>
 <code>
-        //contouring process
-        int thresh = 100;
-        Mat canny_output;
-        Canny(imgThresholded, canny_output, thresh, thresh * 2);
-        vector<vector<Point> > contours;
-        findContours(canny_output, contours, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE); //identifies external contours in image
-        vector<vector<Point> > contours_poly(contours.size());
-        vector<Point2f>centers(contours.size());
-        vector<float>radius(contours.size());
-        for (size_t i = 0; i < contours.size(); i++)
-        {
-            approxPolyDP(contours[i], contours_poly[i], 3, true);
-            minEnclosingCircle(contours_poly[i], centers[i], radius[i]);
-        }
-        Mat drawing = Mat::zeros(canny_output.size(), CV_8UC3);
-        for (size_t i = 0; i < contours.size(); i++)
-        {
-            Scalar color = Scalar(0, 255, 0);
-            drawContours(drawing, contours_poly, (int)i, color);
-            circle(drawing, centers[i], (int)radius[i], color, 2); //drawing circles purely for viewing purposes
-        }
-        //end of contouring process
+//contouring process
+int thresh = 100;
+Mat canny_output;
+Canny(imgThresholded, canny_output, thresh, thresh * 2);
+vector&lt;vector&lt;Point&gt; &gt; contours;
+findContours(canny_output, contours, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE); //identifies external contours in image
+vector&lt;vector&lt;Point&gt; &gt; contours_poly(contours.size());
+vector&lt;Point2f&gt;centers(contours.size());
+vector&lt;float&gt;radius(contours.size());
+for (size_t i = 0; i &lt; contours.size(); i++)
+{
+    approxPolyDP(contours[i], contours_poly[i], 3, true);
+    minEnclosingCircle(contours_poly[i], centers[i], radius[i]);
+}
+Mat drawing = Mat::zeros(canny_output.size(), CV_8UC3);
+for (size_t i = 0; i &lt; contours.size(); i++)
+{
+    Scalar color = Scalar(0, 255, 0);
+    drawContours(drawing, contours_poly, (int)i, color);
+    circle(drawing, centers[i], (int)radius[i], color, 2); //drawing circles purely for viewing purposes
+}
+//end of contouring process
 </code>
     </pre>
   </p>
