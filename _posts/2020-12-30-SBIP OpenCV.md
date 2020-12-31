@@ -50,7 +50,7 @@ date: 2020-12-30
   </p>
   <p>
     <pre>
-<code>
+<code class="codebox">
 #include &lt;opencv2/opencv.hpp&gt;
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
@@ -262,7 +262,7 @@ int main(int argc, char** argv)
   </p>
   <p>
     <pre>
-<code>
+<code class="codebox">
 #include &lt;opencv2/opencv.hpp&gt;
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
@@ -360,7 +360,7 @@ int main(int argc, char** argv)
   </p>
   <p>
     <pre>
-<code>
+<code class="codebox">
 while (true)
 {
     Mat imgOriginal;
@@ -395,7 +395,7 @@ while (true)
     The images also need to be filtered to clean up the white objects in the thresholded image. The erode() and dilate() functions are used to do this in two separate processes known as morphological opening and closing. In the sequence, morphological opening removes smaller white objects (noise) from the image while having less of an effect on the larger white objects and morphological closing removes small black objects that may be embedded in the larger white objects. The result is the very clean objects shown in the thresholded video in my YouTube video. I have included Figure 2 below to demonstrate this. There are a couple specs of white in the image before filtering that are removed by morphological opening and closing. Additonally, the edges of the larger white objects are cleaned up as little as well.
   </p>
   <figure>
-    <img src="/images/sbip_opencv/unfiltered_and_filtered.PNG" class="centered">
+    <img src="/images/sbip_opencv/unfiltered_and_filtered.png" class="centered">
     <figcaption class="centered">Figure 1 - Left image is the image before filtering and the right image is the image after filtering.</figcaption>
   </figure>
   <p>
@@ -411,7 +411,7 @@ while (true)
   </p>
   <p>
     <pre>
-<code>
+<code class="codebox">
 //contouring process
 int thresh = 100;
 Mat canny_output;
@@ -448,7 +448,7 @@ for (size_t i = 0; i &lt; contours.size(); i++)
 
   <p>
     <pre>
-<code>
+<code class="codebox">
 //computing shape relative distances to each other in triangle
 //rounding floats to integers since values are >>100
 //maximum distance error is 0.5% per measurements which is insignificant
@@ -532,7 +532,7 @@ return 0;
     </p>
     <p>
       <pre>
-<code>
+<code class="codebox">
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import numpy as np
