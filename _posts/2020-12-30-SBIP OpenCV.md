@@ -48,7 +48,8 @@ date: 2020-12-30
   <p>
     Let's not beat around the bush; here's the script I used, but fair warning, its a little long and tailored to my specific application. After the script, I'll break it down so it's a little more digestible.
   </p>
-
+  <p>
+    <pre>
 <code>
 #include <opencv2/opencv.hpp>
 #include "opencv2/highgui/highgui.hpp"
@@ -253,13 +254,15 @@ int main(int argc, char** argv)
     return 0;
 }
 </code>
+    </pre>
+  </p>
 
   <p>
     At the start of the code, we're loading the libraries and video file we need as well as initializing the various files we need to write to. Below this part of the code, there is a bunch of lines related to trackbars. These trackbars play an integral part in isolating the red portion of the frames in my video so that the black white frames can be produced. When I first load the video, I adjust the <em>iLowH</em> and <em>iHighH</em> trackbars to center around the hue around corresponding to red. In my case I found 150 and 179 to be good values to use. A similar process is followed for the other trackbars. As these trackbars are adjusted, you're just trying to get as clean of an image as you can. That is, you want only the targets of interest, in my case, the red squares, to appear in the image. If background noise is getting through, then you need to try to tinker with the trackbars a little more or reconfigure your set up.
   </p>
   <p>
     <pre>
-<code class="codebox">
+<code>
 #include <opencv2/opencv.hpp>
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
@@ -357,7 +360,7 @@ int main(int argc, char** argv)
   </p>
   <p>
     <pre>
-<code class="codebox">
+<code>
 while (true)
     {
         Mat imgOriginal;
@@ -408,7 +411,7 @@ while (true)
   </p>
   <p>
     <pre>
-<code class="codebox">
+<code>
         //contouring process
         int thresh = 100;
         Mat canny_output;
@@ -445,7 +448,7 @@ while (true)
 
   <p>
     <pre>
-<code class="codebox">
+<code>
 //computing shape relative distances to each other in triangle
 //rounding floats to integers since values are >>100
 //maximum distance error is 0.5% per measurements which is insignificant
@@ -529,7 +532,7 @@ return 0;
     </p>
     <p>
       <pre>
-<code class="codebox">
+<code>
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import numpy as np
