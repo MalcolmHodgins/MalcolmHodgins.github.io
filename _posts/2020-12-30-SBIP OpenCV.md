@@ -51,14 +51,10 @@ date: 2020-12-30
   <p>
     <pre>
 <code class="codebox" style="height:1000px;overflow-y:scroll;">
-#include <iostream>
-#include <string>
 #include <opencv2/opencv.hpp>
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/imgcodecs.hpp"
-#include <math.h>
-#include <fstream>
 #define PI 3.14159265
 
 using namespace cv;
