@@ -48,8 +48,8 @@ date: 2020-12-30
   <p>
     Let's not beat around the bush; here's the script I used, but fair warning, its a little long and tailored to my specific application. After the script, I'll break it down so it's a little more digestible.
   </p>
-  
-<code class="codebox" style="height:1000px;overflow-y:scroll;">
+
+<code>
 #include <opencv2/opencv.hpp>
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
