@@ -27,7 +27,7 @@ date: 2020-12-30
       As alluded to in my video, the flow in this project is broken up into three distinct sections. First, the video of the robot is recorded. Then, the video is analyzed using OpenCV where data about the angle of the pendulum is extracted, and the processed video files are saved. Following data extraction, python is used to create an animation of the plot to match the frames of the video in the original recording. Figure 1 shows this in graphical format.
     </p>
     <figure>
-      <img src="/images/sbip_opencv/process_flow.PNG" class="centered">
+      <img src="/images/sbip_opencv/process_flow.png" class="centered">
       <figcaption class="centered">Figure 1 - Process flow.</figcaption>
     </figure>
 </section>
@@ -51,7 +51,7 @@ date: 2020-12-30
   <p>
     <pre>
 <code>
-#include <opencv2/opencv.hpp>
+#include &lt;opencv2/opencv.hpp&gt;
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/imgcodecs.hpp"
@@ -73,8 +73,8 @@ int main(int argc, char** argv)
 
     //initializing videowriter object
     int fps = 30;
-    int frame_width = static_cast<int>(cap.get(CAP_PROP_FRAME_WIDTH));
-    int frame_height = static_cast<int>(cap.get(CAP_PROP_FRAME_HEIGHT));
+    int frame_width = static_cast&lt;int&gt;(cap.get(CAP_PROP_FRAME_WIDTH));
+    int frame_height = static_cast&lt;int&gt;(cap.get(CAP_PROP_FRAME_HEIGHT));
     Size frame_size(frame_width, frame_height);
     VideoWriter firstVideoWriter("C:/Users/malco/Desktop/OpenCV 4_5_1/ip_opencv/final_version/ip_test_video2_contours.avi", VideoWriter::fourcc('M', 'J', 'P', 'G'), fps, frame_size, true);
     if (firstVideoWriter.isOpened() == false) //check if the videowriter object was initialized
@@ -165,18 +165,18 @@ int main(int argc, char** argv)
         int thresh = 100;
         Mat canny_output;
         Canny(imgThresholded, canny_output, thresh, thresh * 2);
-        vector<vector<Point> > contours;
+        vector&lt;vector&lt;Point&gt; &gt; contours;
         findContours(canny_output, contours, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE); //identifies external contours in image
-        vector<vector<Point> > contours_poly(contours.size());
-        vector<Point2f>centers(contours.size());
-        vector<float>radius(contours.size());
-        for (size_t i = 0; i < contours.size(); i++)
+        vector&lt;vector&lt;Point&gt; &gt; contours_poly(contours.size());
+        vector&lt;Point2f&gt;centers(contours.size());
+        vector&lt;float&gt;radius(contours.size());
+        for (size_t i = 0; i &lt; contours.size(); i++)
         {
             approxPolyDP(contours[i], contours_poly[i], 3, true);
             minEnclosingCircle(contours_poly[i], centers[i], radius[i]);
         }
         Mat drawing = Mat::zeros(canny_output.size(), CV_8UC3);
-        for (size_t i = 0; i < contours.size(); i++)
+        for (size_t i = 0; i &lt; contours.size(); i++)
         {
             Scalar color = Scalar(0, 255, 0);
             drawContours(drawing, contours_poly, (int)i, color);
@@ -189,7 +189,7 @@ int main(int argc, char** argv)
     //maximum distance error is 0.5% per measurements which is insignificant
         if (contours.size() == 3) { //depending on how good the thresholding is, you may get more or less contours than expected. The following script relies on three contours
             int distances[3][3] = { {0,0,0},{0,0,0},{0,0,0} };
-            for (size_t i = 0; i < 2; i++)
+            for (size_t i = 0; i &lt; 2; i++)
             {
                 distances[i][0] = sqrt(pow(centers[i + 1].x - centers[i].x, 2) + pow(centers[i + 1].y - centers[i].y, 2));
                 distances[i][1] = i + 1; //these two lines keep track of where the data came from in centers[i]
@@ -203,22 +203,22 @@ int main(int argc, char** argv)
             int index1 = 0;
             int index2 = 0;
             //find median distance value on triangle
-            if (((distances[0][0] > distances[1][0]) && (distances[0][0] < distances[2][0])) || ((distances[0][0] < distances[1][0]) && (distances[0][0] > distances[2][0]))) {
+            if (((distances[0][0] &gt; distances[1][0]) && (distances[0][0] &lt; distances[2][0])) || ((distances[0][0] &lt; distances[1][0]) && (distances[0][0] &gt; distances[2][0]))) {
                 index1 = distances[0][1];
                 index2 = distances[0][2];
             }
-            else if (((distances[1][0] > distances[0][0]) && (distances[1][0] < distances[2][0])) || ((distances[1][0] < distances[0][0]) && (distances[1][0] > distances[2][0]))) {
+            else if (((distances[1][0] &gt; distances[0][0]) && (distances[1][0] &lt; distances[2][0])) || ((distances[1][0] &lt; distances[0][0]) && (distances[1][0] &gt; distances[2][0]))) {
                 index1 = distances[1][1];
                 index2 = distances[1][2];
             }
-            else if (((distances[2][0] > distances[0][0]) && (distances[2][0] < distances[1][0])) || ((distances[2][0] < distances[0][0]) && (distances[2][0] > distances[1][0]))) {
+            else if (((distances[2][0] &gt; distances[0][0]) && (distances[2][0] &lt; distances[1][0])) || ((distances[2][0] &lt; distances[0][0]) && (distances[2][0] &gt; distances[1][0]))) {
                 index1 = distances[2][1];
                 index2 = distances[2][2];
             }
             //compute angle between points wrt to vertical
             double param, ip_angle;
             param = (abs(centers[index1].x - centers[index2].x) / abs(centers[index1].y - centers[index2].y));
-            if (centers[index2].x > centers[index1].x) {
+            if (centers[index2].x &gt; centers[index1].x) {
                 param = -1 * param;
             }
             ip_angle = atan(param) * 180 / PI; //pendulum angle in degrees
@@ -236,7 +236,7 @@ int main(int argc, char** argv)
             myfile << ip_angle << "\n";
         }
 
-        //uncomment these two lines if you want to see the frames being written the the video files
+        //uncomment these two lines if you want to see the frames being written the video files
         //imshow("Contours", drawing); //show result of contouring and line drawing
         //imshow("Original", imgOriginal); //show the original image
 
