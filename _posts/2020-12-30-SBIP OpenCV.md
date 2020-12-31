@@ -15,8 +15,8 @@ date: 2020-12-30
     <p>
       Honestly, this project went very smoothly which is probably a testament mostly to how easy OpenCV is to use. Their documentation is fantastic. Below I've embedded a YouTube video I put together to explain my project and the rest of this post will dive into the process, mechanics, and weak points of this project!
     </p>
-
-    <iframe class="centered" width="560" height="315" src="https://www.youtube.com/embed/wsnC2qINjDE" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    
+    <iframe class="centered" width="560" height="315" src="https://www.youtube.com/embed/ftpqMir1G3Q" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </section>
 
 <span><br></span>
