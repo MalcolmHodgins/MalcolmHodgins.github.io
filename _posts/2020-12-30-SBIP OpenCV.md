@@ -262,14 +262,10 @@ int main(int argc, char** argv)
   <p>
     <pre>
 <code class="codebox">
-#include <iostream>
-#include <string>
 #include <opencv2/opencv.hpp>
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/imgcodecs.hpp"
-#include <math.h>
-#include <fstream>
 #define PI 3.14159265
 
 using namespace cv;
