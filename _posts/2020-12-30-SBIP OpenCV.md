@@ -13,9 +13,9 @@ date: 2020-12-30
       I saw an opportunity to learn a new skill, by exploring OpenCV, while also doing what any respectable engineer/researcher needs to do when they design and build a new system: quantify the performance of the system. Basically, last summer, I had designed a state-space controller for my robot and implemented it but I never got around to trying to measure exactly how well my system was performing. Especially as I tuned the controller for better and better results, its a non-trivial task determining whether one controller actually performs better than another. What I needed was a fairly precise and convenient way to measure the state variables of my system, such as pendulum angle, over time so that I could then perform some analysis on the results and make a numerically-informed decision about controller performance. What I set out to do with this project, besides learning how to use a computer vision-based application and sharpening my C++ skills, is use OpenCV to reliably measure the angle of my inverted pendulum robot over time and provide the data in a simple format for analysis.
     </p>
     <p>
-      Honestly, this project went very smoothly which is probably a testament mostly to how easy OpenCV is to use. Their documentation is fantastic. Below I've embedded a YouTube video I put together to explain my project and the rest of this post will dive into the process, mechanics, and weak points of this project!
+      Honestly, this project went very smoothly which is probably a testament mostly to how easy OpenCV is to use. Their documentation is fantastic. Below I've embedded a YouTube video I put together to explain my project and the rest of this post will dive into the process, mechanics, and assumption used in this project!
     </p>
-    
+
     <iframe class="centered" width="560" height="315" src="https://www.youtube.com/embed/ftpqMir1G3Q" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </section>
 
@@ -579,4 +579,25 @@ plt.show()
     <p>
       Since my textfile was a single column corresponding to the pendulum angle in each frame, it was very straightforward to read in with numpy. No data formatting was required. The next thing that is done in the code is it corrects for any misalignment in the orientation of the camera compared to the pendulum, that is, for example, if the camera is slightly tilted to the right (In fact you can see this code in action in the video I posted to YouTube by looking at the original video of the pendulum. Yet the plot that is shown is centered around zero!). Next, a vector is created that is the same length as the amount of data available and each element corresponds to the period between frames for the given framerate of the video. In this case, my videos were recorded at 30 frames per second. Following this, the video writer and plot are created. The plot is animated using <em>animation.FuncAnimation()</em> and the animation is saved using <em>ani.save()</em>. That's it! Pretty easy, right?
     </p>
+</section>
+
+<span><br></span>
+
+<section>
+  <h2> Implementation Assumptions </h2>
+    <p>
+      We have seen so far how the data flows in this project from start to finish as well as how each stage was accomplished using the software provided. We will now begin looking at one of the more important aspects when thinking about design. Namely, under what circumstances would the design breakdown and what could be done to address these issues?
+    </p>
+      <h3> Issue 1 </h3>
+        <p>
+          I have used these red squares to represent the angle of the axis of the pendulum but is this exactly correct? The simple answer is no. Based on the exact size of the red squares and how good I was at lining up the squares to be parallel, there will be some systematic error in the representation of the pendulum axis using the red squares. To explain a little more, consider I'm using the edge of the 3D printed housing of the inverted pendulum to line up the squares since I know the edge is straight and therefore will be parallel to the axis of the pendulum. If the size of the squares are not identical then when lined up along the edge of the pendulum, the center-points of each square will be a different distance away from the edge of the inverted pendulum housing. This will be picked up by OpenCV and will translate to systematic error in the angle measurement. We can similar see how not lining up identical red squares to the edge perfectly would introduce similar systematic error.
+        </p>
+        <p>
+          So how could this be fixed? Well one way to certainly mitigate these issues is to take myself and my limited precision with placing and cutting squares out of the equation. By this, I mean the inverted pendulum could be designed to knowing it will eventually by measured using OpenCV. For example, recesses could be included in the 3D printing file of the housing so that 3D printed red squares could be placed into the recesses when measurements need to be taken. This would be much more precise than my hand-placing and hand-cutting method.
+        </p>
+
+      <h3> Issue 2 </h3>
+        <p>
+          What if the camera which records the initial video is not facing the side of the inverted pendulum head on? Well, the angle measurements that are extracted will be less than what is actually occurring when the robot is operating. It may be a little confusing to understand why initially, but if you can imagine the robot turned, say 45 degrees, away from the camera and then we imagine how the squares would look to the camera, perhaps you can start to see why a given angle will appear as less to the camera. This is actually one of the reasons why I included 3 red squares in the first place. From high school math, we know that three points define the orientation of a plane. Using physical measurements of the spacing between these squares in addition to an image with the three red squares, we would be able to calibrate the image and determine by what amount and in what direction the robot has turned away from the camera. I didn't include this functionality in this version of the software because it is difficult to get working well and its above my paygrade for a holiday project; I have a family after all! Perhaps in a future version of this project I will implement this but for now it remains on the shelf.
+        </p>
 </section>
