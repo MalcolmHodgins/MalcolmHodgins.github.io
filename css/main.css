@@ -173,6 +173,15 @@ footer {
     font-size: .8em;
 }
 
+.fa {
+  padding: 5px;
+}
+
+.fa-linkedin {
+  background: none;
+  color: white;
+}
+
 ul.posts {
     margin: 20px auto 40px;
     font-size: 1.3em;
@@ -202,6 +211,10 @@ ul li {
 
 figure {
   margin-inline-start: 0px;
+}
+
+iframe {
+  border-radius: 20px;
 }
 
 
