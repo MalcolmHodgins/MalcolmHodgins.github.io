@@ -175,11 +175,14 @@ footer {
 
 .fa {
   padding: 5px;
+  margin-left: 5px;
 }
 
 .fa-linkedin {
-  background: none;
+  background: #007bb5;
   color: white;
+  border-radius: 25%;
+
 }
 
 ul.posts {
