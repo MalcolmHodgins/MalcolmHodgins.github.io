@@ -60,7 +60,7 @@ date: 2022-06-22
       With these three different pieces introduced we can move to describing the procedure for the calculation, which is broken up into four steps. Starting from initial guesses for the bus voltages and bus voltage angles,
     </p>
     <figure>
-      <img src="/images/power_flow_solution_NR/initial_voltages.png">
+      <img src="/images/power_flow_solution_NR/initial_voltages.png" class="centered">
     </figure>
     <p>
       step 1 is to compute a comparison of the real and reactive power at bus k by calculating the difference between the defined real and reactive power for bus k and the real and reactive power at bus k as determined by the equations from Figure 2.
