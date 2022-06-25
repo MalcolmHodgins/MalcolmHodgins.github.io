@@ -68,6 +68,18 @@ date: 2022-06-22
     <figure>
       <img src="/images/power_flow_solution_NR/delta_P_Q.png" class="centered">
     </figure>
+    <p>
+      Step 2 is next and requires the use of the equations from figures 4 and 5 to compute the Jacobian matrix in figure 3. In practice, step 1 and step 2 can actually be swapped since the steps do not depend on the other to proceed with the calculation. Step 3 requires setting up the Jacobian matrix and P and Q variance vector in an Ax = b matrix equation format to determine the vector for the bus voltage and voltage angle variances, as shown below.
+    </p>
+    <figure>
+      <img src="/images/power_flow_solution_NR/matrix_eqn.png" class="centered">
+    </figure>
+    <p>
+      The matrix equation can be solved using Gaussian elimination and back substitution. Lastly for step 4, the vector for the bus voltage and voltage angle variances is used with the vector for the bus voltages and voltage angles in this iteration to determine the bus voltages and voltage angles for use in the next iteration.
+    </p>
+    <figure>
+      <img src="/images/power_flow_solution_NR/increment_V_delta_eqn.png" class="centered">
+    </figure>
 
 </section>
 
