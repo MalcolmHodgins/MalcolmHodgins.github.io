@@ -124,7 +124,7 @@ date: 2022-06-22
           5*1i -10*1i 5*1i;
           5*1i 5*1i -10*1i];
 
-  % Enter real powers as negative when drawing on the power system and
+  % Enter powers as negative when drawing on the power system and
   % positive when adding to the system for both P and Q. Enter in per-unit.
   % First entry corresponds to the first load bus after the slack bus i.e.
   % the slack bus is not included in these vectors.
@@ -385,18 +385,6 @@ date: 2022-06-22
     <figure>
       <img src="/images/power_flow_solution_NR/question_answer.png" class="centered">
     </figure>
-
-
-
-</section>
-
-<span><br></span>
-
-<section>
-  <h2> The Test </h2>
-  <p>
-    L
-  </p>
 </section>
 
 <span><br></span>
