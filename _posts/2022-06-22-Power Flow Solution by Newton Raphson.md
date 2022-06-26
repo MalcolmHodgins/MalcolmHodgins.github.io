@@ -95,7 +95,7 @@ date: 2022-06-22
     </p>
     <p>
       <pre>
-  <code class="codebox" style="height:800px;">
+  <code class="codebox" style="overflow-x:hidden;">
   clear
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
