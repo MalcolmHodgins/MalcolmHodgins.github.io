@@ -379,6 +379,15 @@ date: 2022-06-22
   </code>
       </pre>
     </p>
+    <p>
+      The first bus in the tables is the slack bus which stays at a voltage of 1.0 pu and 0 degrees by definition. Following the slack bus in the tables are buses 2 and 3. At iteration 4, we find bus 2 has a voltage of 0.8015 pu with an angle of -16.9811 degrees and bus 3 has an angle of 0.7725 pu and an angle of -20.1361 degrees. Since the code was set up for a question from the Power System Analysis and Design textbook mentioned earlier, we can compare the results to the answer book in the textbook to verify the correct result was achieved.
+    </p>
+    <figure>
+      <img src="/images/power_flow_solution_NR/question_answer.png" class="centered">
+    </figure>
+
+
+
 </section>
 
 <span><br></span>
