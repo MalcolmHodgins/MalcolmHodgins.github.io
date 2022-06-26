@@ -7,7 +7,7 @@ date: 2022-06-22
 <section>
   <h2> Introduction </h2>
     <p>
-      For any power system to operate under normal balanced three-phase steady state conditions, it must be ensured that the generation is sufficient for the load on the system, that bus voltages do not deviate significantly from rated values, generators operate within their real and reactive power limits, and transmission lines and transformers do not become overloaded. The basic tool to investigate satisfaction of these criteria is a power flow calculation for given power system parameters. In this post, we will be looking into power flow solutions utilizing the Newton Raphson method and briefly reviewing code I developed to implement the power flow solution method.
+      For any power system to operate under normal balanced three-phase steady state conditions, it must be ensured that the generation is sufficient for the load on the system, that bus voltages do not deviate significantly from rated values, generators operate within their real and reactive power limits, and transmission lines and transformers do not become overloaded. The basic tool to investigate satisfaction of these criteria is a power flow calculation for given power system parameters. In this post, we will be looking into power flow solutions utilizing the Newton Raphson method and briefly reviewing code I developed in Matlab to implement the power flow solution method.
     </p>
 </section>
 
@@ -91,8 +91,12 @@ date: 2022-06-22
 <section>
   <h2> The Code </h2>
     <p>
-      A
+      The code I developed to implement power flow solution by the Newton Raphson technique is shown in the code block below. It is broken up into three sections: Inputs, Code, and Results. Under the input section, the values that describe the power system to be analyzed are entered. These are the values for bus voltage, bus voltage angle, real and reactive power, and the bus admittance matrix for the power system which describes how the buses are connected. The last value to edit is the number of iterations to run the procedure, shown a little lower down. The code currently has is set to run 4 times (Iteration = 1:4).
     </p>
+    <p>
+      Assuming the values for the scenario have been entered correctly, then hitting run in Matlab will execute the code and at the end of each iteration, Matlab will report the results of the calculation as shown at the bottom of the code under Iteration Results.
+    </p>
+
     <p>
       <pre>
   <code class="codebox" style="overflow-x:hidden;">
@@ -103,12 +107,14 @@ date: 2022-06-22
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
   % Enter voltage magnitudes in per-unit. Element 1 is always the slack bus.
+  % Enter rows for each bus in the system with the guess for the voltage.
   V = [1;
       1;
       1];
 
   % Enter the angles for the bus voltages in radians. Element 1 is always
-  % for the slack bus.
+  % for the slack bus. Must have the same number of rows as vector V and are
+  % the initial guesses for the system.
   Delta = [0;
       0;
       0];
@@ -120,7 +126,8 @@ date: 2022-06-22
 
   % Enter real powers as negative when drawing on the power system and
   % positive when adding to the system for both P and Q. Enter in per-unit.
-  % First entry corresponds to the first load bus after the slack bus.
+  % First entry corresponds to the first load bus after the slack bus i.e.
+  % the slack bus is not included in these vectors.
   P_i = [-1;
       -1.5];
   Q_i = [-0.5;
@@ -323,6 +330,52 @@ date: 2022-06-22
 
       output = [V Delta_degrees]
   end
+  </code>
+      </pre>
+    </p>
+    <p>
+      After running the code shown, the results appear as shown below
+    </p>
+    <p>
+      <pre>
+  <code class="codebox" style="overflow-x:hidden;">
+  >> Newton_Raphson_Power_Flow_Solver_Q6_42
+
+  Iteration =
+       1
+  output =
+
+      1.0000         0
+      0.8833  -13.3690
+      0.8667  -15.2789
+
+
+  Iteration =
+       2
+  output =
+
+      1.0000         0
+      0.8145  -16.4110
+      0.7882  -19.2756
+
+
+  Iteration =
+       3
+  output =
+
+      1.0000         0
+      0.8019  -16.9610
+      0.7731  -20.1021
+
+
+  Iteration =
+       4
+  output =
+
+      1.0000         0
+      0.8015  -16.9811
+      0.7725  -20.1361
+
   </code>
       </pre>
     </p>
