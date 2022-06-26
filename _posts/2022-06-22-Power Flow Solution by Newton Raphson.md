@@ -81,7 +81,7 @@ date: 2022-06-22
       <img src="/images/power_flow_solution_NR/increment_V_delta_eqn.png" class="centered">
     </figure>
     <p>
-      The iteration i+1 values are then used to start the process all over again and continues either until a particular number of iterations have elapsed or some solution uncertainty criteria has been reached such as the changes to the computed real power at bus k between iterations.
+      The iteration i+1 values are then used to start the process all over again and continues either until a particular number of iterations have elapsed or some solution uncertainty criteria has been reached. Common criteria is called power mismatches and defines the magnitude of the variances in the real and reactive power variance vector.
     </p>
 
 </section>
@@ -92,6 +92,239 @@ date: 2022-06-22
   <h2> The Code </h2>
     <p>
       A
+    </p>
+    <p>
+      <pre>
+  <code class="codebox" style="height:800px;">
+  clear
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %                          Scenario Inputs                             %
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  % Enter voltage magnitudes in per-unit. Element 1 is always the slack bus.
+  V = [1;
+      1;
+      1];
+
+  % Enter the angles for the bus voltages in radians. Element 1 is always
+  % for the slack bus.
+  Delta = [0;
+      0;
+      0];
+
+  % Enter Ybus in per-unit.
+  Ybus = [-10*1i 5*1i 5*1i;
+          5*1i -10*1i 5*1i;
+          5*1i 5*1i -10*1i];
+
+  % Enter real powers as negative when drawing on the power system and
+  % positive when adding to the system for both P and Q. Enter in per-unit.
+  % First entry corresponds to the first load bus after the slack bus.
+  P_i = [-1;
+      -1.5];
+  Q_i = [-0.5;
+      -0.75];
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %                            Code Begins                               %
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+  % Initialize arrays to hold the results of jacobian matrix calculations
+  J1 = zeros(size(V,1)-1,size(V,1)-1);
+  J2 = zeros(size(V,1)-1,size(V,1)-1);
+  J3 = zeros(size(V,1)-1,size(V,1)-1);
+  J4 = zeros(size(V,1)-1,size(V,1)-1);
+
+  % Initialize P and Q vectors
+  P = P_i;
+  Q = Q_i;
+
+  for Iteration = 1:4
+      % compute n equals k entries for Jacobian matrices
+      for k = 2:size(V,1) % don't need to count slack bus which is always in the no. 1 slot
+          % Compute J1 values for n equal to k
+          J1kk_sum = 0;
+          for n = 1:k-1
+              J1kk_sum = J1kk_sum + abs(Ybus(k,n))*V(n)*sin(Delta(k)-Delta(n)-angle(Ybus(k,n)));
+          end
+          for n = k+1:size(V,1)
+              J1kk_sum = J1kk_sum + abs(Ybus(k,n))*V(n)*sin(Delta(k)-Delta(n)-angle(Ybus(k,n)));
+          end
+          J1kk = -1*V(k)*J1kk_sum;
+          J1(k-1,k-1) = J1kk;
+      end
+
+      for k = 2:size(V,1) % don't need to count slack bus which is always in the no. 1 slot
+          % Compute J2 values for n equal to k
+          J2kk_sum = 0;
+          for n = 1:size(V,1)
+              J2kk_sum = J2kk_sum + abs(Ybus(k,n))*V(n)*cos(Delta(k)-Delta(n)-angle(Ybus(k,n)));
+          end
+          J2kk = J2kk_sum + V(k)*abs(Ybus(k,k))*cos(angle(Ybus(k,k)));
+          J2(k-1,k-1) = J2kk;
+      end
+
+      for k = 2:size(V,1) % don't need to count slack bus which is always in the no. 1 slot
+          % Compute J3 values for n equal to k
+          J3kk_sum = 0;
+          for n = 1:k-1
+              J3kk_sum = J3kk_sum + abs(Ybus(k,n))*V(n)*cos(Delta(k)-Delta(n)-angle(Ybus(k,n)));
+          end
+          for n = k+1:size(V,1)
+              J3kk_sum = J3kk_sum + abs(Ybus(k,n))*V(n)*cos(Delta(k)-Delta(n)-angle(Ybus(k,n)));
+          end
+          J3kk = V(k)*J3kk_sum;
+          J3(k-1,k-1) = J3kk;
+      end
+
+      for k = 2:size(V,1) % don't need to count slack bus which is always in the no. 1 slot
+          % Compute J4 values for n equal to k
+          J4kk_sum = 0;
+          for n = 1:size(V,1)
+              J4kk_sum = J4kk_sum + abs(Ybus(k,n))*V(n)*sin(Delta(k)-Delta(n)-angle(Ybus(k,n)));
+          end
+          J4kk = J4kk_sum - V(k)*abs(Ybus(k,k))*sin(angle(Ybus(k,k)));
+          J4(k-1,k-1) = J4kk;
+      end
+
+      % Calculate the Jacobian matrices values for where n does not equal k
+
+      % Compute J1 values for n not equal to k
+      for k = 2:size(V,1)
+          J1kn_sum = 0;
+          for n = 2:k-1
+              J1kn_sum = V(k)*abs(Ybus(k,n))*V(n)*sin(Delta(k)-Delta(n)-angle(Ybus(k,n)));
+              J1(k-1,n-1) = J1kn_sum;
+          end
+          for n = k+1:size(V,1)
+              J1kn_sum = V(k)*abs(Ybus(k,n))*V(n)*sin(Delta(k)-Delta(n)-angle(Ybus(k,n)));
+              J1(k-1,n-1) = J1kn_sum;
+          end
+      end
+
+      % Compute J2 values for n not equal to k
+      for k = 2:size(V,1)
+          J2kn_sum = 0;
+          for n = 2:k-1
+              J2kn_sum = V(k)*abs(Ybus(k,n))*cos(Delta(k)-Delta(n)-angle(Ybus(k,n)));
+              J2(k-1,n-1) = J2kn_sum;
+          end
+          for n = k+1:size(V,1)
+              J2kn_sum = V(k)*abs(Ybus(k,n))*cos(Delta(k)-Delta(n)-angle(Ybus(k,n)));
+              J2(k-1,n-1) = J2kn_sum;
+          end
+      end
+
+      % Compute J3 values for n not equal to k
+      for k = 2:size(V,1)
+          J3kn_sum = 0;
+          for n = 2:k-1
+              J3kn_sum = -1*V(k)*abs(Ybus(k,n))*V(n)*cos(Delta(k)-Delta(n)-angle(Ybus(k,n)));
+              J3(k-1,n-1) = J3kn_sum;
+          end
+          for n = k+1:size(V,1)
+              J3kn_sum = -1*V(k)*abs(Ybus(k,n))*V(n)*cos(Delta(k)-Delta(n)-angle(Ybus(k,n)));
+              J3(k-1,n-1) = J3kn_sum;
+          end
+      end
+
+      % Compute J4 values for n not equal to k
+      for k = 2:size(V,1)
+          J4kn_sum = 0;
+          for n = 2:k-1
+              J4kn_sum = V(k)*abs(Ybus(k,n))*sin(Delta(k)-Delta(n)-angle(Ybus(k,n)));
+              J4(k-1,n-1) = J4kn_sum;
+          end
+          for n = k+1:size(V,1)
+              J4kn_sum = V(k)*abs(Ybus(k,n))*sin(Delta(k)-Delta(n)-angle(Ybus(k,n)));
+              J4(k-1,n-1) = J4kn_sum;
+          end
+      end
+      J = [J1 J2
+          J3 J4];
+
+      % Compute P and Q vectors for ith iteration
+      for k = 2:size(V,1)
+          P_sum = 0;
+          for n = 1:size(V,1)
+              P_sum = P_sum + abs(Ybus(k,n))*V(n)*cos(Delta(k)-Delta(n)-angle(Ybus(k,n)));
+          end
+          P_k = V(k)*P_sum;
+          P(k-1) = P_k;
+      end
+
+      for k = 2:size(V,1)
+          Q_sum = 0;
+          for n = 1:size(V,1)
+              Q_sum = Q_sum + abs(Ybus(k,n))*V(n)*sin(Delta(k)-Delta(n)-angle(Ybus(k,n)));
+          end
+          Q_k = V(k)*Q_sum;
+          Q(k-1) = Q_k;
+      end
+
+      % Compute P-P(i) and Q-Q(i)...
+      delta_p = P_i - P;
+      delta_q = Q_i - Q;
+      delta_y = [delta_p;
+          delta_q];
+
+      % Converting variables for use in back substitution code
+      A = J;
+      b = delta_y;
+
+      % Gaussian elimination and back substitution code
+      [row,col] = size(A);
+      n = row;
+      x = zeros(size(b));
+      for k = 1:n-1   
+        for i = k+1:n
+           xMultiplier = A(i,k) / A(k,k);
+           for j=k+1:n
+              A(i,j) = A(i,j) - xMultiplier * A(k,j);
+           end
+           b(i, :) = b(i, :) - xMultiplier * b(k, :);
+        end
+      % There is a missing "end" ?!   
+          % backsubstitution:
+          x(n, :) = b(n, :) / A(n,n);
+          for i = n-1:-1:1
+              summation = b(i, :);
+              for j = i+1:n
+                  summation = summation - A(i,j) * x(j, :);
+              end
+              x(i, :) = summation / A(i,i);
+          end
+      end
+
+      x; % resultant deltas in bus angles and bus voltage magnitudes
+
+      delta_Delta = x(1:size(x,1)/2);
+      delta_V = x((size(x,1)/2)+1:size(x,1));
+
+      % calculating new bus voltages and angles based on deltas calculated
+      for k = 2:size(V,1)
+          Delta(k) = Delta(k) + delta_Delta(k-1);
+          V(k) = V(k) + delta_V(k-1);
+      end
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %                          Iteration Results                           %
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+      Iteration
+      Delta;
+      Delta_degrees = Delta*180/pi;
+      V;
+      P;
+      Q;
+      J;
+
+      output = [V Delta_degrees]
+  end
+  </code>
+      </pre>
     </p>
 </section>
 
