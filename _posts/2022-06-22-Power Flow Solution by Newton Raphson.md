@@ -16,7 +16,7 @@ date: 2022-06-22
 <section>
   <h2> The Math </h2>
     <p>
-      As we start, I should note I have drawn from the textbook Power System Analysis and Design by D.Glover, M. Sarma, T. Overbye to aid in the explanation of the calculation and for the formula images. There are a couple different pieces that are required in order to begin this calculation for example, a given bus will have a voltage (V), a voltage angle (delta), and a certain real power (P) and reactive power (Q) while operating in a power system. For the calculation, the variables are rolled into the vectors shown below.
+      As we start, I should note I have drawn from the textbook Power System Analysis and Design by D.Glover, M. Sarma, T. Overbye to aid in the explanation of the calculation and for the formula images. There are a couple different pieces that are required in order to begin this calculation. For each bus in the system, we need to set up variables for the voltage (V), voltage angle (delta), real power (P), and reactive power (Q). For the calculation, the variables are rolled into the vectors shown below. Depending on the types of buses being considered some of these variables could be omitted but for now we are assuming all are required.
     </p>
     <figure>
       <img src="/images/power_flow_solution_NR/V_delta_P_Q_vector.png" class="centered">
@@ -26,14 +26,14 @@ date: 2022-06-22
       Where V, P, and Q are in per-units but the voltage angle, delta, is in radians. Note, that the vector elements are numbered from 2 to N where N is the number of buses in the power system and 1 is omitted because it would refer to the slack bus (or the main grid bus) for which the voltage and voltage angle are already known (1.0 + j0.0 p.u.).
     </p>
     <p>
-      Next, the real and reactive power for a bus k for k = 2, 3, ...,N can be calculated according to the equations below utilizing the values for V and delta according the latest iteration's values for these variables. For the first iteration, these would be initial guesses of these values.
+      Next, the real and reactive power for bus k for k = 2, 3, ..., N can be calculated according to the equations below utilizing the values for V and delta according the latest iteration's values for these variables. For the first iteration, these would be initial guesses of these values.
     </p>
     <figure>
       <img src="/images/power_flow_solution_NR/bus_real_reactive_power_eqns.png" class="centered">
       <figcaption class="centered"> Figure 2 - Real and reactive power for bus k.</figcaption>
     </figure>
     <p>
-      The last major piece is the Jacobian matrix for the power system. It is shown below and split into for different regions, J1 to J4.
+      The last major piece is the Jacobian matrix for the power system. It is shown below and split into four different regions, J1 to J4.
     </p>
     <figure>
       <img src="/images/power_flow_solution_NR/jacobian.png" class="centered">
@@ -47,7 +47,7 @@ date: 2022-06-22
       <figcaption class="centered"> Figure 4 - Jacobian matric formulas for n not equal to k.</figcaption>
     </figure>
     <p>
-      and for instances where n does equal k, these equations can be used
+      and for instances where n does equal k, the equations below can be used
     </p>
     <figure>
       <img src="/images/power_flow_solution_NR/jacobian_n_equals_k.png" class="centered">
@@ -63,23 +63,26 @@ date: 2022-06-22
       <img src="/images/power_flow_solution_NR/initial_voltages.png" class="centered">
     </figure>
     <p>
-      step 1 is to compute a comparison of the real and reactive power at bus k by calculating the difference between the defined real and reactive power for bus k and the real and reactive power at bus k as determined by the equations from Figure 2.
+      step 1 is to compute a comparison of the real and reactive power at bus k by calculating the difference between the defined real and reactive power for bus k and the real and reactive power at bus k as determined by the equations from Figure 2. This result could be called the real and reactive power variance vector.
     </p>
     <figure>
       <img src="/images/power_flow_solution_NR/delta_P_Q.png" class="centered">
     </figure>
     <p>
-      Step 2 is next and requires the use of the equations from figures 4 and 5 to compute the Jacobian matrix in figure 3. In practice, step 1 and step 2 can actually be swapped since the steps do not depend on the other to proceed with the calculation. Step 3 requires setting up the Jacobian matrix and P and Q variance vector in an Ax = b matrix equation format to determine the vector for the bus voltage and voltage angle variances, as shown below.
+      Step 2 is next and requires the use of the equations from figures 4 and 5 to compute the Jacobian matrix in figure 3. In practice, step 1 and step 2 can actually be swapped since the steps do not depend on the other to proceed with the calculation. Step 3 requires setting up the Jacobian matrix and real and reactive power variance vector in an Ax = b matrix equation format to determine the vector for the bus voltage and voltage angle variances, as shown below.
     </p>
     <figure>
       <img src="/images/power_flow_solution_NR/matrix_eqn.png" class="centered">
     </figure>
     <p>
-      The matrix equation can be solved using Gaussian elimination and back substitution. Lastly for step 4, the vector for the bus voltage and voltage angle variances is used with the vector for the bus voltages and voltage angles in this iteration to determine the bus voltages and voltage angles for use in the next iteration.
+      The matrix equation can be solved using Gaussian elimination and back substitution. Lastly, for step 4, the bus voltage and voltage angle variance vector is used with the current iteration vector, iteration i, for the bus voltages and voltage angles to determine the bus voltages and voltage angles for use in the next iteration, iteration i+1.
     </p>
     <figure>
       <img src="/images/power_flow_solution_NR/increment_V_delta_eqn.png" class="centered">
     </figure>
+    <p>
+      The iteration i+1 values are then used to start the process all over again and continues either until a particular number of iterations have elapsed or some solution uncertainty criteria has been reached such as the changes to the computed real power at bus k between iterations.
+    </p>
 
 </section>
 
