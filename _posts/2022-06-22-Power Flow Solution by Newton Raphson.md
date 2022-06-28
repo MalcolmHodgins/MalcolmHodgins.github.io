@@ -99,7 +99,7 @@ date: 2022-06-28
 
     <p>
       <pre>
-  <code class="codebox" style="overflow-x:hidden;">
+  <code class="codebox">
   clear
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -338,7 +338,7 @@ date: 2022-06-28
     </p>
     <p>
       <pre>
-  <code class="codebox" style="overflow-x:hidden;">
+  <code class="codebox">
   >> Newton_Raphson_Power_Flow_Solver_Q6_42
 
   Iteration =
