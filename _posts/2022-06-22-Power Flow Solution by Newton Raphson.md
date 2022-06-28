@@ -2,7 +2,7 @@
 layout: post
 title: "Development of Newton Raphson Power Flow Solution Code"
 title_image: "/images/post_type_images/code.JPG"
-date: 2022-06-22
+date: 2022-06-28
 ---
 <section>
   <h2> Introduction </h2>
@@ -392,7 +392,7 @@ date: 2022-06-22
 <section>
   <h2> Closing Remarks </h2>
     <p>
-      As this code is designed, it requires the user to have a good idea of their bus admittance matrix for the power system and also assumes that only load buses or P-Q buses are being present. Modifications would be required to accommodate the inclusion of P-V buses or rather buses with a defined real power and voltage such as those that would be connected to generators in a power system. Given these limitations, the logical next step would be to further develop the code to be capable of computing the bus admittance matrix and also be able to solve systems with more than just P-Q buses. Perhaps in the future!
+      As this code is designed, it requires the user to have a good idea of their bus admittance matrix for the power system which may require the user to perform an extra step and also assumes that only load buses or P-Q buses are being present. Modifications would be required to accommodate the inclusion of P-V buses or rather buses with a defined real power and voltage such as those that would be connected to generators in a power system. Given these limitations, the logical next step would be to further develop the code to be capable of computing the bus admittance matrix and also be able to solve systems with more than just P-Q buses. Perhaps in the future!
     </p>
 
 </section>
