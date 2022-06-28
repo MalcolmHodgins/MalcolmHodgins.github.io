@@ -16,7 +16,7 @@ date: 2022-06-22
 <section>
   <h2> The Math </h2>
     <p>
-      As we start, I should note I have drawn from the textbook Power System Analysis and Design by D.Glover, M. Sarma, T. Overbye to aid in the explanation of the calculation and for the formula images. There are a couple different pieces that are required in order to begin this calculation. For each bus in the system, we need to set up variables for the voltage (V), voltage angle (delta), real power (P), and reactive power (Q). For the calculation, the variables are rolled into the vectors shown below. Depending on the types of buses being considered some of these variables could be omitted but for now we are assuming all are required.
+      As we start, I should note I have drawn from the textbook Power System Analysis and Design by D.Glover, M. Sarma, T. Overbye to aid in the explanation of the calculation and for the formula images. There are a couple different pieces that are required in order to begin this calculation. For each bus in the system, we need to set up variables for the voltage (V), voltage angle (delta), real power (P), and reactive power (Q). For the calculation, the variables are rolled into the vectors shown below. Depending on the types of buses being considered, some of these variables could be omitted but for now we are assuming all are required.
     </p>
     <figure>
       <img src="/images/power_flow_solution_NR/V_delta_P_Q_vector.png" class="centered">
@@ -26,7 +26,7 @@ date: 2022-06-22
       Where V, P, and Q are in per-units but the voltage angle, delta, is in radians. Note, that the vector elements are numbered from 2 to N where N is the number of buses in the power system and 1 is omitted because it would refer to the slack bus (or the main grid bus) for which the voltage and voltage angle are already known (1.0 + j0.0 p.u.).
     </p>
     <p>
-      Next, the real and reactive power for bus k for k = 2, 3, ..., N can be calculated according to the equations below utilizing the values for V and delta according the latest iteration's values for these variables. For the first iteration, these would be initial guesses of these values.
+      Next, the real and reactive power for bus k for k = 2, 3, ..., N can be calculated according to the equations below utilizing the values for V and delta according the values of the latest iteration for these variables. For the first iteration, these would be initial guesses of these values.
     </p>
     <figure>
       <img src="/images/power_flow_solution_NR/bus_real_reactive_power_eqns.png" class="centered">
@@ -69,7 +69,7 @@ date: 2022-06-22
       <img src="/images/power_flow_solution_NR/delta_P_Q.png" class="centered">
     </figure>
     <p>
-      Step 2 is next and requires the use of the equations from figures 4 and 5 to compute the Jacobian matrix in figure 3. In practice, step 1 and step 2 can actually be swapped since the steps do not depend on the other to proceed with the calculation. Step 3 requires setting up the Jacobian matrix and real and reactive power variance vector in an Ax = b matrix equation format to determine the vector for the bus voltage and voltage angle variances, as shown below.
+      Step 2 is next and requires the use of the equations from figures 4 and 5 to compute the Jacobian matrix in figure 3. In practice, step 1 and step 2 can actually be swapped if desired since the steps do not depend on the other to proceed with the calculation. Step 3 requires setting up the Jacobian matrix and real and reactive power variance vector in an Ax = b matrix equation format to determine the vector for the bus voltage and voltage angle variances, as shown below.
     </p>
     <figure>
       <img src="/images/power_flow_solution_NR/matrix_eqn.png" class="centered">
@@ -81,7 +81,7 @@ date: 2022-06-22
       <img src="/images/power_flow_solution_NR/increment_V_delta_eqn.png" class="centered">
     </figure>
     <p>
-      The iteration i+1 values are then used to start the process all over again and continues either until a particular number of iterations have elapsed or some solution uncertainty criteria has been reached. Common criteria is called power mismatches and defines the magnitude of the variances in the real and reactive power variance vector.
+      The iteration i+1 values are then used to start the process all over again and continues either until a particular number of iterations have elapsed or some solution uncertainty criteria has been reached. A common criteria is called a power mismatch and defines the magnitude of the variances in the real and reactive power variance vector.
     </p>
 
 </section>
@@ -91,10 +91,10 @@ date: 2022-06-22
 <section>
   <h2> The Code </h2>
     <p>
-      The code I developed to implement power flow solution by the Newton Raphson technique is shown in the code block below. It is broken up into three sections: Inputs, Code, and Results. Under the input section, the values that describe the power system to be analyzed are entered. These are the values for bus voltage, bus voltage angle, real and reactive power, and the bus admittance matrix for the power system which describes how the buses are connected. The last value to edit is the number of iterations to run the procedure, shown a little lower down. The code currently has is set to run 4 times (Iteration = 1:4).
+      The code I developed to implement the power flow solution by the Newton Raphson technique is shown in the code block below. It is broken up into three sections: Inputs, Code, and Results. Under the input section, the values that describe the power system to be analyzed are entered. These are the values for bus voltage, bus voltage angle, real and reactive power, and the bus admittance matrix for the power system which describes how the buses are connected. The last value to edit is the number of iterations to run the procedure, shown a little lower down. The code currently has is set to run 4 times (Iteration = 1:4).
     </p>
     <p>
-      Assuming the values for the scenario have been entered correctly, then hitting run in Matlab will execute the code and at the end of each iteration, Matlab will report the results of the calculation as shown at the bottom of the code under Iteration Results.
+      Assuming the values for the scenario have been entered correctly, then hitting run in Matlab will execute the code and at the end of each iteration Matlab will report the results of the calculation as shown at the bottom of the code under Iteration Results. I have entered the inputs already for a question from Power System Analysis and Design which features two buses with defined real and reactive power requirements (P-Q buses or load buses).
     </p>
 
     <p>
@@ -196,7 +196,7 @@ date: 2022-06-22
           J4(k-1,k-1) = J4kk;
       end
 
-      % Calculate the Jacobian matrices values for where n does not equal k
+      % Calculate the Jacobian matrix values for where n does not equal k
 
       % Compute J1 values for n not equal to k
       for k = 2:size(V,1)
@@ -380,7 +380,7 @@ date: 2022-06-22
       </pre>
     </p>
     <p>
-      The first bus in the tables is the slack bus which stays at a voltage of 1.0 pu and 0 degrees by definition. Following the slack bus in the tables are buses 2 and 3. At iteration 4, we find bus 2 has a voltage of 0.8015 pu with an angle of -16.9811 degrees and bus 3 has a voltage of 0.7725 pu and an angle of -20.1361 degrees. Since the code was set up for a question from the Power System Analysis and Design textbook mentioned earlier, we can compare the results to the answer book in the textbook to verify the correct result was achieved.
+      The first bus or row in each of the tables is the slack bus which stays at a voltage of 1.0 pu and 0 degrees by definition. Following the slack bus in the tables are buses 2 and 3. At iteration 4, we find bus 2 has a voltage of 0.8015 pu with an angle of -16.9811 degrees and bus 3 has a voltage of 0.7725 pu and an angle of -20.1361 degrees. Since the code was set up for a question from the Power System Analysis and Design textbook mentioned earlier, we can compare the results to the answer book in the textbook to verify the correct result was achieved.
     </p>
     <figure>
       <img src="/images/power_flow_solution_NR/question_answer.png" class="centered">
@@ -392,7 +392,7 @@ date: 2022-06-22
 <section>
   <h2> Closing Remarks </h2>
     <p>
-      I
+      As this code is designed, it requires the user to have a good idea of their bus admittance matrix for the power system and also assumes that only load buses or P-Q buses are being present. Modifications would be required to accommodate the inclusion of P-V buses or rather buses with a defined real power and voltage such as those that would be connected to generators in a power system. Given these limitations, the logical next step would be to further develop the code to be capable of computing the bus admittance matrix and also be able to solve systems with more than just P-Q buses. Perhaps in the future!
     </p>
 
 </section>
